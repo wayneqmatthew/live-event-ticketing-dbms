@@ -6,7 +6,7 @@ public class CommissionPayout {
     private int payout_ref_id;
     private int payee_id;
     private float commission_amount;
-    private int total_ticket_sales;
+    private float total_ticket_sales;
     private float commission_percentage;
     private LocalDate payout_date;
 }
