@@ -1,34 +1,49 @@
 plugins{
     id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
 repositories{
     mavenCentral()
 }
 
-java{
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
-
-application {
-    mainClass = 'com.dbms.Main'
+run{
+    standardInput = System.in
+    jvmArgs = ['-Djava.awt.headless=true']
 }
 
 dependencies{
-    implementation 'org.openjfx:javafx-controls:21'
-    implementation 'org.openjfx:javafx-fxml:21'
+    implementation libs.guava
 
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    implementation 'org.openjfx:javafx-controls:22.0.2'
+    implementation 'org.openjfx:javafx-fxml:22.0.2'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.9.2'
 }
 
-tasks.withType(JavaExec){
-    jvmArgs = [
-        '--module-path', classpath.asPath,
-        '--add-modules', 'javafx.controls,javafx.fxml'
-    ]
+javafx{
+    version = "22.0.2"
+    modules = ['javafx.controls', 'javafx.fxml']
 }
 
 test{
     useJUnitPlatform()
+
+        testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+        showStandardStreams = true
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(24)
+    }
+}
+
+application {
+    mainClass = 'com.dbms.Main'
 }
