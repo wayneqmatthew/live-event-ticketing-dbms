@@ -1,5 +1,7 @@
 package com.dbms;
 
+import com.dbms.models.Organizer;
+
 import javafx.application.Application;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -8,6 +10,16 @@ import javafx.scene.layout.Pane;
 
 public class Main extends Application{
     public static void main(String[] args){
+        
+        // organizer testing for connection to db
+        // adds new organizer
+        Organizer org = new Organizer();
+        org.region = "New York";
+        org.country = "USA";
+        org.city = "New York City";
+        org.add_organizer();
+        System.out.println("Main executed");
+
         launch(args);
     }
 
