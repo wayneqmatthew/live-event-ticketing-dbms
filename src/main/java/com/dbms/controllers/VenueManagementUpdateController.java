@@ -1,6 +1,5 @@
 package com.dbms.controllers;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,9 +11,6 @@ import com.dbms.utils.Database;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -64,7 +60,6 @@ public class VenueManagementUpdateController {
         }
 
         final int finalCapacity = capacity;
-        //final int venue_id = venueToUpdate.getVenue_id();
         
         new Thread(() -> {
             if (venueToUpdate != null){
@@ -155,20 +150,6 @@ public class VenueManagementUpdateController {
     private void onCancelClick(ActionEvent event){
         closeWindow();
     }
-
-    // @FXML
-    // private void onBackClick(ActionEvent event){
-    //     try{
-    //         Parent root = FXMLLoader.load(getClass().getResource("/com/dbms/view/venue-menu.fxml"));
-
-    //         Stage stage = (Stage) nameField.getScene().getWindow();
-    //         stage.setScene(new Scene(root));
-    //         stage.setTitle("Venue Management");
-    //     } catch (IOException e){
-    //         e.printStackTrace();
-    //         showAlert(Alert.AlertType.ERROR, "Error", "Could not load the venue menu.");
-    //     }
-    // }
 
     private void closeWindow(){
         Stage stage = (Stage) saveUpdateButton.getScene().getWindow();
