@@ -1,14 +1,11 @@
 package com.dbms;
 
-import com.dbms.controllers.VenueMenuController;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import javafx.scene.image.Image;
 
 public class Main extends Application{
     public static void main(String[] args){
@@ -18,16 +15,18 @@ public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/venue-menu.fxml"));
-
-        VenueMenuController venueMenuController = new VenueMenuController();
-
-        loader.setController(venueMenuController);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/LoginWindow.fxml"));
         Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Image logo = new Image("com/dbms/view/assets/logo.png");
 
-        Scene scene = new Scene(root, 400, 200);
+        primaryStage.getIcons().add(logo);
+        primaryStage.setTitle("Live Ticketing DBMS");
+        primaryStage.setWidth(1200);
+        primaryStage.setHeight(800);
+        primaryStage.setResizable(false);
+        primaryStage.setFullScreen(false);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("DMBS");
         primaryStage.show();
     }
 }
