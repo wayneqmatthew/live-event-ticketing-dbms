@@ -59,6 +59,23 @@ public class AdminManagementController {
 
     }
 
+    @FXML
+    private void onLogOutClick(){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/LoginWindow.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage primaryStage = (Stage) rootPane.getScene().getWindow();
+
+            primaryStage.setScene(scene);
+        }
+
+        catch(Exception e){
+            e.printStackTrace();
+            showAlert(AlertType.ERROR, "Error", "Failed to load log out: " + e.getMessage());
+        }
+    }
+
     private void showAlert(AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
