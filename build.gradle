@@ -32,6 +32,15 @@ java {
     }
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDirs = ['src/main/java'] 
+            include '**/*.fxml'
+        }
+    }
+}
+
 test {
     useJUnitPlatform()
     testLogging {

@@ -4,8 +4,10 @@ import com.dbms.models.Organizer;
 
 import javafx.application.Application;
 import javafx.scene.text.Text;
+import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 
 public class Main extends Application{
@@ -13,30 +15,17 @@ public class Main extends Application{
         
         // organizer testing for connection to db
         // adds new organizer
-        Organizer org = new Organizer();
-        org.region = "New York";
-        org.country = "USA";
-        org.city = "New York City";
+        Organizer org = new Organizer("Grand Corp.", "grand_corp@gmail.com", "London", "United Kingdom", "Europe", "Active");
         org.add_organizer();
-        System.out.println("Main executed");
-
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Pane root = new Pane();
-        Scene scene = new Scene(root, 400, 200);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("DMBS");
-
-        Text text = new Text();
-        text.setText("Main Page");
-        text.setX(50);
-        text.setY(50);
-
-        root.getChildren().add(text);
-
-        primaryStage.show();
+    public void start(Stage stage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("/com/dbms/views/commission_payout.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("DMBS");
+        stage.show();
     }
 }
