@@ -13,7 +13,7 @@
       <TextField fx:id="cityField" layoutX="226.0" layoutY="168.0" promptText="City" />
       <TextField fx:id="countryField" layoutX="226.0" layoutY="214.0" promptText="Country" />
       <TextField fx:id="regionField" layoutX="227.0" layoutY="268.0" promptText="Region" />
-      <Button fx:id="saveButton" layoutX="185.0" layoutY="330.0" mnemonicParsing="false" text="Save" />
+      <Button fx:id="saveButton" layoutX="185.0" layoutY="330.0" mnemonicParsing="false" onAction="#onSaveVenueClick" text="Save" />
       <Button fx:id="backButton" layoutX="256.0" layoutY="330.0" mnemonicParsing="false" onAction="#onBackClick" text="Back to Menu" />
       <Button fx:id="cancelButton" layoutX="375.0" layoutY="330.0" mnemonicParsing="false" onAction="#onCancelClick" text="Cancel" />
    </children>

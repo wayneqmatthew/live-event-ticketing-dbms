@@ -21,7 +21,7 @@ public class VenueMenuController {
     @FXML
     private void onAddNewVenueClick(ActionEvent event){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/venue-form.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/add-venue.fxml"));
             Parent root = loader.load();
 
             Stage stage = new Stage();
@@ -39,7 +39,7 @@ public class VenueMenuController {
     @FXML
     private void onManageVenuesClick(ActionEvent event){
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("com/dbms/venue-view.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/dbms/view/manage-venues.fxml"));
 
             Stage stage = (Stage) manageExistingVenuesButton.getScene().getWindow();
             stage.setScene(new Scene(root));

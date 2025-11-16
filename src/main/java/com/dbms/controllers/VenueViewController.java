@@ -76,7 +76,7 @@ public class VenueViewController implements Initializable{
 
     private void loadVenues(){
         venueList.clear();
-        String sql = "SELECT venue_id, venue_name, venue_capacity, city, country, region, status FROM VENUE";
+        String sql = "SELECT venue_id, name, capacity, city, country, region, status FROM VENUE";
 
         try (Connection conn = Database.connect();
             Statement stmt = conn.createStatement();
@@ -85,8 +85,8 @@ public class VenueViewController implements Initializable{
             while (rs.next()){
                 venueList.add(new Venue(
                     rs.getInt("venue_id"),
-                    rs.getString("venue_name"),
-                    rs.getInt("venue_capacity"),
+                    rs.getString("name"),
+                    rs.getInt("capacity"),
                     rs.getString("city"),
                     rs.getString("country"),
                     rs.getString("region"),

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import com.dbms.models.Venue;
 import com.dbms.utils.Database;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -68,15 +69,19 @@ public class VenueFormController {
             return;
         }
 
-        if (venueToUpdate != null){
-            updateVenue(name, capacity, city, country, region);
-        } else {
-            addVenue(name, capacity, city, country, region, status);
-        }
+        final int finalCapacity = capacity;
+
+        new Thread(() -> {
+            if (venueToUpdate != null){
+                updateVenue(name, finalCapacity, city, country, region);
+            } else {
+                addVenue(name, finalCapacity, city, country, region, status);
+            }
+        }).start();
     }
 
     private void addVenue(String name, int capacity, String city, String country, String region, String status){
-        String sql = "INSERT INTO Venue (venue_name, venue_capacity, city, country, region, status) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Venue (name, capacity, city, country, region, status) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = Database.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -90,15 +95,19 @@ public class VenueFormController {
 
                 int rowsAffected = pstmt.executeUpdate();
 
-                if (rowsAffected > 0){
-                    showAlert(Alert.AlertType.INFORMATION, "Success", "Venue Successfully Added!");
-                    closeWindow();
-                } else {
-                    showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to add venue.");
-                }
+                Platform.runLater(() -> {
+                    if (rowsAffected > 0){
+                        showAlert(Alert.AlertType.INFORMATION, "Success", "Venue Successfully Added!");
+                        closeWindow();
+                    } else {
+                        showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to add venue.");
+                    }
+                });
                 
         } catch(SQLException e){
-            showAlert(Alert.AlertType.ERROR, "Database Error", "Error connecting to database: " + e.getMessage());
+            Platform.runLater(() -> {
+                showAlert(Alert.AlertType.ERROR, "Database Error", "Error connecting to database: " + e.getMessage());
+            });
             e.printStackTrace();
         }
     }
@@ -136,7 +145,7 @@ public class VenueFormController {
     @FXML
     private void onBackClick(ActionEvent event){
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("/com/dbms/venue-menu.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/dbms/view/venue-menu.fxml"));
 
             Stage stage = (Stage) nameField.getScene().getWindow();
             stage.setScene(new Scene(root));
