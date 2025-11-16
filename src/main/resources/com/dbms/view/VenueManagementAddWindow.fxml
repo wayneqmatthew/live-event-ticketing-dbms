@@ -14,7 +14,7 @@
       <TextField fx:id="countryAddField" layoutX="226.0" layoutY="214.0" promptText="Country" />
       <TextField fx:id="regionAddField" layoutX="227.0" layoutY="268.0" promptText="Region" />
       <Button fx:id="saveAddButton" layoutX="185.0" layoutY="330.0" mnemonicParsing="false" text="Save" onAction="#onSaveVenueClick" text="Save"/>
-      <Button fx:id="" layoutX="256.0" layoutY="330.0" mnemonicParsing="false" onAction="#onBackClick" text="Back to Menu" />
-      <Button fx:id="" layoutX="375.0" layoutY="330.0" mnemonicParsing="false" onAction="#onCancelClick" text="Cancel" />
+      <Button fx:id="backButton" layoutX="256.0" layoutY="330.0" mnemonicParsing="false" onAction="#onBackClick" text="Back to Menu" />
+      <Button fx:id="cancelButton" layoutX="375.0" layoutY="330.0" mnemonicParsing="false" onAction="#onCancelClick" text="Cancel" />
    </children>
 </Pane>
