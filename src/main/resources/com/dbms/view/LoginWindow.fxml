@@ -49,12 +49,12 @@
       </ImageView>
       <TextField fx:id="emailField" layoutX="277.0" layoutY="519.0" prefHeight="39.0" prefWidth="240.0" promptText="Email" style="-fx-background-radius: 50;">
          <font>
-            <Font name="Inter Regular" size="18.0" />
+            <Font name="Inter 18pt Bold" size="18.0" />
          </font>
       </TextField>
       <TextField fx:id="passwordField" layoutX="277.0" layoutY="572.0" prefHeight="39.0" prefWidth="240.0" promptText="Password" style="-fx-background-radius: 50;">
          <font>
-            <Font name="Inter Regular" size="18.0" />
+            <Font name="Inter 18pt Bold" size="18.0" />
          </font>
       </TextField>
       <ImageView fitHeight="51.0" fitWidth="60.0" layoutX="190.0" layoutY="539.0" preserveRatio="true">
@@ -64,14 +64,14 @@
       </ImageView>
       <Button layoutX="559.0" layoutY="547.0" mnemonicParsing="false" onAction="#onSubmitClick" style="-fx-background-radius: 50; -fx-background-color: #4f378a;" text="Submit" textFill="WHITE">
          <effect>
-            <DropShadow height="5.0" radius="2.0" width="5.0">
+            <DropShadow height="5.0" offsetY="3.0" radius="2.0" width="5.0">
                <color>
-                  <Color opacity="0.7480915784835815" />
+                  <Color opacity="0.4999999701976776" />
                </color>
             </DropShadow>
          </effect>
          <font>
-            <Font name="Inter Regular" size="18.0" />
+            <Font name="Inter 18pt Bold" size="18.0" />
          </font>
       </Button>
    </children>

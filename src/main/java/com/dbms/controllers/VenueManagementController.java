@@ -1,24 +1,6 @@
 package com.dbms.controllers;
 
-import com.dbms.models.Venue;
-import com.dbms.utils.Database;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory; 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import java.io.IOException;
-
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,8 +10,25 @@ import java.sql.Statement;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class VenueViewController implements Initializable{
+import com.dbms.models.Venue;
+import com.dbms.utils.Database;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
+public class VenueManagementController implements Initializable {
     @FXML
     private TableView<Venue> venueTable;
 
@@ -53,15 +52,6 @@ public class VenueViewController implements Initializable{
 
     @FXML
     private TableColumn<Venue, String> statusColumn;
-
-    // @FXML
-    // private Button updateButton;
-
-    // @FXML 
-    // private Button deleteButton;
-
-    // @FXML 
-    // private Button backButton;
 
     private ObservableList<Venue> venueList = FXCollections.observableArrayList();
 
@@ -102,11 +92,12 @@ public class VenueViewController implements Initializable{
 
         } catch (SQLException e){
             e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load database: " + e.getMessage());
         }
     }
 
     @FXML
-    private void onSetInactiveClick(ActionEvent event){
+    private void onDeleteClick(ActionEvent event){
         Venue selectedVenue = venueTable.getSelectionModel().getSelectedItem();
 
         if (selectedVenue == null){
@@ -139,17 +130,17 @@ public class VenueViewController implements Initializable{
                         showAlert(Alert.AlertType.INFORMATION, "Success", "Venue deleted.");
                         loadVenues();
                     } else {
-                        showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to delete venue");
+                        showAlert(Alert.AlertType.ERROR, "Error", "Failed to delete venue.");
                     }
                  } catch (SQLException e) {
-                    showAlert(Alert.AlertType.ERROR, "Database Error", "Error " + e.getMessage());
                     e.printStackTrace();
+                    showAlert(Alert.AlertType.ERROR, "Error", "Failed to load database: " + e.getMessage());
                  }
         }
     }
 
     @FXML
-    private void onUpdateVenueClick(ActionEvent event){
+    private void onUpdateClick(ActionEvent event){
         Venue selectedVenue = venueTable.getSelectionModel().getSelectedItem();
 
         if (selectedVenue == null){
@@ -158,35 +149,53 @@ public class VenueViewController implements Initializable{
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/venue-form.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/VenueManagementUpdateWindow.fxml"));
             Parent root = loader.load();
 
-            VenueFormController formController = loader.getController();
+            VenueManagementUpdateController formUpdateController = loader.getController();
 
-            formController.initData(selectedVenue);
+            formUpdateController.initData(selectedVenue);
 
             Stage stage = new Stage();
             stage.setTitle("Update Venue");
             stage.setScene(new Scene(root));
-            stage.show();
+            stage.setOnHidden(e -> loadVenues());
+            stage.showAndWait();
 
         } catch (IOException e){
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Error", "Could not load the update form.");
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to update data: " + e.getMessage());
         }
     }
 
     @FXML
-    private void onBackClick(ActionEvent event){
+    private void onReturnToMainMenuClick(ActionEvent event){
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("/com/dbms/view/venue-menu.fxml"));
-
+            Parent root = FXMLLoader.load(getClass().getResource("/com/dbms/view/AdminWindow.fxml"));
             Stage stage = (Stage) venueTable.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("Venue Management");
         } catch (IOException e){
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Error", "Could not load the venue menu.");
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to return to main menu: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void onAddClick(ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/VenueManagementAddWindow.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Add New Venue");
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.setOnHidden(e -> loadVenues());
+            stage.showAndWait();
+
+        } catch (IOException e){
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Could not load the add venue management: " + e.getMessage());
         }
     }
 

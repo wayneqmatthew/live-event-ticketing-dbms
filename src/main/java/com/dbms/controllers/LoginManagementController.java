@@ -49,7 +49,7 @@ public class LoginManagementController {
 
             switch(email + ":" + password){
                 case admin:
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/venue-menu.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminWindow.fxml"));
                     Parent root = loader.load();
                     Scene scene = new Scene(root);
                     Stage primaryStage = (Stage) rootPane.getScene().getWindow();

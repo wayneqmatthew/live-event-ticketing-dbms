@@ -20,61 +20,54 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-
-public class VenueFormController {
+public class VenueManagementAddController {
+    @FXML
+    private TextField nameAddField;
 
     @FXML
-    private TextField nameField;
-
-    @FXML
-    private TextField capacityField;
+    private TextField capacityAddField;
 
     @FXML 
-    private TextField cityField;
+    private TextField cityAddField;
 
     @FXML
-    private TextField countryField;
+    private TextField countryAddField;
 
     @FXML
-    private TextField regionField;
+    private TextField regionAddField;
 
     @FXML
-    private Button saveButton;
-
-    @FXML
-    private Button cancelButton;
-
-    @FXML
-    private Button backButton;
+    private Button saveAddButton;
 
     private Venue venueToUpdate = null;
     
     @FXML
-    private void onSaveVenueClick(ActionEvent event){
-        String name = nameField.getText();
-        String city = cityField.getText();
-        String country = countryField.getText();
-        String region = regionField.getText();
+    private void onSaveClick(ActionEvent event){
+        String name = nameAddField.getText();
+        String city = cityAddField.getText();
+        String country = countryAddField.getText();
+        String region = regionAddField.getText();
         int capacity = 0;
         String status = "Active";
 
-        if (name.isEmpty() || capacityField.getText().isEmpty() || city.isEmpty() || country.isEmpty()){
+        if (name.isEmpty() || capacityAddField.getText().isEmpty() || city.isEmpty() || country.isEmpty()){
             showAlert(Alert.AlertType.ERROR, "Form Error", "Please fill in all required fields.");
             return;
         }
 
         try{
-            capacity = Integer.parseInt(capacityField.getText());
+            capacity = Integer.parseInt(capacityAddField.getText());
         } catch (NumberFormatException e){
             showAlert(Alert.AlertType.ERROR, "Form Error", "Capacity must be a valid number.");
             return;
         }
 
         final int finalCapacity = capacity;
-        final int venue_id = venueToUpdate.getVenue_id();
+        //final int venue_id = venueToUpdate.getVenue_id();
         
         new Thread(() -> {
             if (venueToUpdate != null){
+                final int venue_id = venueToUpdate.getVenue_id();
                 updateVenue(venue_id, name, finalCapacity, city, country, region);
             } else {
                 addVenue(name, finalCapacity, city, country, region, status);
@@ -162,22 +155,22 @@ public class VenueFormController {
         closeWindow();
     }
 
-    @FXML
-    private void onBackClick(ActionEvent event){
-        try{
-            Parent root = FXMLLoader.load(getClass().getResource("/com/dbms/view/venue-menu.fxml"));
+    // @FXML
+    // private void onBackClick(ActionEvent event){
+    //     try{
+    //         Parent root = FXMLLoader.load(getClass().getResource("/com/dbms/view/venue-menu.fxml"));
 
-            Stage stage = (Stage) nameField.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Venue Management");
-        } catch (IOException e){
-            e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Error", "Could not load the venue menu.");
-        }
-    }
+    //         Stage stage = (Stage) nameField.getScene().getWindow();
+    //         stage.setScene(new Scene(root));
+    //         stage.setTitle("Venue Management");
+    //     } catch (IOException e){
+    //         e.printStackTrace();
+    //         showAlert(Alert.AlertType.ERROR, "Error", "Could not load the venue menu.");
+    //     }
+    // }
 
     private void closeWindow(){
-        Stage stage = (Stage) saveButton.getScene().getWindow();
+        Stage stage = (Stage) saveAddButton.getScene().getWindow();
         stage.close();
     }
 
@@ -192,10 +185,10 @@ public class VenueFormController {
     public void initData(Venue venue){
         this.venueToUpdate = venue;
 
-        nameField.setText(venue.getName());
-        capacityField.setText(String.valueOf(venue.getCapacity()));
-        cityField.setText(venue.getCity());
-        countryField.setText(venue.getCountry());
-        regionField.setText(venue.getRegion());
+        nameAddField.setText(venue.getName());
+        capacityAddField.setText(String.valueOf(venue.getCapacity()));
+        cityAddField.setText(venue.getCity());
+        countryAddField.setText(venue.getCountry());
+        regionAddField.setText(venue.getRegion());
     }
 }

@@ -21,7 +21,7 @@ public class Venue {
         this.city = new SimpleStringProperty(city);
         this.country = new SimpleStringProperty(country);
         this.region = new SimpleStringProperty(region);
-        this.status = new SimpleStringProperty(region);
+        this.status = new SimpleStringProperty(status);
     }
 
     //Property getters
