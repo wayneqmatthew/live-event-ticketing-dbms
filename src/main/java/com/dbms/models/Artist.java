@@ -1,4 +1,4 @@
-package main.java.com.dbms.models;
+package com.dbms.models;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
