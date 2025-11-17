@@ -10,7 +10,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class AdminManagementController {
+public class AdminController {
     @FXML
     private Pane rootPane;
 
@@ -34,13 +34,13 @@ public class AdminManagementController {
 
     @FXML
     private void onCustomerManagementClick(){
-
+        
     }
 
     @FXML
     private void onVenueManagementClick(){
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/VenueManagementWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminVenueManagementWindow.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage primaryStage = (Stage) rootPane.getScene().getWindow();

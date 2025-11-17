@@ -26,9 +26,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class VenueManagementController implements Initializable {
+public class AdminVenueManagementController implements Initializable {
     @FXML
     private TableView<Venue> venueTable;
 
@@ -149,15 +151,18 @@ public class VenueManagementController implements Initializable {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/VenueManagementUpdateWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminVenueManagementUpdateWindow.fxml"));
             Parent root = loader.load();
 
-            VenueManagementUpdateController formUpdateController = loader.getController();
+            AdminVenueManagementUpdateController formUpdateController = loader.getController();
 
             formUpdateController.initData(selectedVenue);
 
             Stage stage = new Stage();
-            stage.setTitle("Update Venue");
+            Image logo = new Image("com/dbms/view/assets/logo.png");
+
+            stage.getIcons().add(logo);
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
             stage.setOnHidden(e -> loadVenues());
             stage.showAndWait();
@@ -183,11 +188,14 @@ public class VenueManagementController implements Initializable {
     @FXML
     private void onAddClick(ActionEvent event){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/VenueManagementAddWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminVenueManagementAddWindow.fxml"));
             Parent root = loader.load();
 
             Stage stage = new Stage();
-            stage.setTitle("Add New Venue");
+            Image logo = new Image("com/dbms/view/assets/logo.png");
+
+            stage.getIcons().add(logo);
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
             stage.setResizable(false);
             stage.setOnHidden(e -> loadVenues());

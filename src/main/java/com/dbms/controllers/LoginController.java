@@ -11,7 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class LoginManagementController {
+public class LoginController {
     @FXML
     private Pane rootPane;
 
@@ -49,24 +49,39 @@ public class LoginManagementController {
 
             switch(email + ":" + password){
                 case admin:
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminWindow.fxml"));
-                    Parent root = loader.load();
-                    Scene scene = new Scene(root);
-                    Stage primaryStage = (Stage) rootPane.getScene().getWindow();
+                    FXMLLoader loaderAdmin = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminWindow.fxml"));
+                    Parent rootAdmin = loaderAdmin.load();
+                    Scene sceneAdmin = new Scene(rootAdmin);
+                    Stage primaryStageAdmin = (Stage) rootPane.getScene().getWindow();
 
-                    primaryStage.setScene(scene);
+                    primaryStageAdmin.setScene(sceneAdmin);
                     break;
                 
                 case organizer:
-                    //FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/venue-menu.fxml"));
+                    FXMLLoader loaderOrganizer = new FXMLLoader(getClass().getResource("/com/dbms/view/OrganizerWindow.fxml"));
+                    Parent rootOrganizer = loaderOrganizer.load();
+                    Scene sceneOrganizer = new Scene(rootOrganizer);
+                    Stage primaryStageOrganizer = (Stage) rootPane.getScene().getWindow();
+
+                    primaryStageOrganizer.setScene(sceneOrganizer);
                     break;
                 
                 case artist:
-                    //FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/venue-menu.fxml"));
+                    FXMLLoader loaderArtist = new FXMLLoader(getClass().getResource("/com/dbms/view/ArtistWindow.fxml"));
+                    Parent rootArtist = loaderArtist.load();
+                    Scene sceneArtist = new Scene(rootArtist);
+                    Stage primaryStageArtist = (Stage) rootPane.getScene().getWindow();
+
+                    primaryStageArtist.setScene(sceneArtist);
                     break;
                 
                 case customer:
-                    //FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/venue-menu.fxml"));
+                    FXMLLoader loaderCustomer = new FXMLLoader(getClass().getResource("/com/dbms/view/CustomerWindow.fxml"));
+                    Parent rootCustomer = loaderCustomer.load();
+                    Scene sceneCustomer = new Scene(rootCustomer);
+                    Stage primaryStageCustomer = (Stage) rootPane.getScene().getWindow();
+
+                    primaryStageCustomer.setScene(sceneCustomer);
                     break;
                 
                 default:
