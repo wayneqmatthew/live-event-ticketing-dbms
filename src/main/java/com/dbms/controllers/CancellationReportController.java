@@ -86,7 +86,7 @@ public class CancellationReportController implements Initializable{
             reportTable.setItems(reportList);
 
         } catch (SQLException e) {
-            showAlert(Alert.AlertType.ERROR, "Database Error", "Error Loading report" + e.getMessage());
+            showAlert(Alert.AlertType.ERROR, "Database Error", " Error Loading report" + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -94,7 +94,7 @@ public class CancellationReportController implements Initializable{
     @FXML
     private void onReturnToMenuClick(ActionEvent event){
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("address of admin main page"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/dbms/view/CustomerWindow.fxml"));
             Stage stage = (Stage) backButton.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Main Menu");
