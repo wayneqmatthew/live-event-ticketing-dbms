@@ -1,5 +1,7 @@
 package com.dbms.controllers;
 
+import javax.swing.Action;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,22 @@ import javafx.stage.Stage;
 public class AdminController {
     @FXML
     private Pane rootPane;
+
+    @FXML
+    private void onReportMenuClick(ActionEvent event){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminReportWindow.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage primaryStage = (Stage) rootPane.getScene().getWindow();
+
+            primaryStage.setScene(scene);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            showAlert(AlertType.ERROR, "Error", "Failed to load Report Menu: " + e.getMessage());
+        }
+    }
 
 
     @FXML

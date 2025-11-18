@@ -148,7 +148,6 @@ CREATE TABLE Ticket (
     event_id INT,						-- Foreign key connecting Ticket to Event
     customer_id INT,					-- Foreign key connecting Ticket to Customer
     purchase_date DATE,					-- Date when the ticket was purchased
-    price DECIMAL(10,2),				-- Price of the ticket
     status VARCHAR(20),					-- Status of the ticket (i.e "Active", "Cancelled")
     FOREIGN KEY (event_id) REFERENCES Event(event_id),
     FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
