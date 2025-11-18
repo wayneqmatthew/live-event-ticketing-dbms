@@ -53,7 +53,6 @@ public class LoginController implements Initializable{
         userType = userTypeChoiceBox.getValue();
     }
 
-
     @FXML
     private void onSubmitClick(ActionEvent event){
         try{
@@ -190,5 +189,9 @@ public class LoginController implements Initializable{
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public String getIdentifier(){
+        return identifier;
     }
 }

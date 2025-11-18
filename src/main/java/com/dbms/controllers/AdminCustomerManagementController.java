@@ -20,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -206,6 +207,32 @@ public class AdminCustomerManagementController implements Initializable{
         } catch (IOException e){
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Error", "Could not load the add customer management: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void onViewClick(ActionEvent event){
+        Customer selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
+
+        if (selectedCustomer == null){
+            showAlert(Alert.AlertType.WARNING, "No Selection", "Please select a customer to update.");
+            return;
+        }
+
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminCustomerManagementViewWindow.fxml"));
+            Parent root = loader.load();
+
+            AdminCustomerManagementViewController formUpdateController = loader.getController();
+
+            formUpdateController.initData(selectedCustomer);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        }
+        catch(IOException e){
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Could not load the view customer: " + e.getMessage());
         }
     }
 
