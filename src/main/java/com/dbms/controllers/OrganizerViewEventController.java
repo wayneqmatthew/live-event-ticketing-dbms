@@ -112,8 +112,31 @@ public class OrganizerViewEventController implements Initializable{
         }
     }
 
+    private boolean isOrganizerActive(int organizerId) {
+        String sql = "SELECT status FROM Organizer WHERE organizer_id = ?";
+        try (Connection conn = Database.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, organizerId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return "Active".equalsIgnoreCase(rs.getString("status"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to check organizer status: " + e.getMessage());
+        }
+        return false;
+    }
+
     @FXML
     private void onCreateClick(ActionEvent event){
+        if (!isOrganizerActive(organizerId)) {
+            showAlert(Alert.AlertType.WARNING, "Access Denied", "Only active organizers can create events.");
+            return;
+        }
+        
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/OrganizerCreateEventWindow.fxml"));
             Parent root = loader.load();
