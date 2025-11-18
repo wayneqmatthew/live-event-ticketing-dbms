@@ -62,9 +62,9 @@ public class AdminOrganizerManagementController implements Initializable {
         organizerIdColumn.setCellValueFactory(new PropertyValueFactory<>("organizer_id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-        regionColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
+        cityColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
         countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
-        cityColumn.setCellValueFactory(new PropertyValueFactory<>("region"));
+        regionColumn.setCellValueFactory(new PropertyValueFactory<>("region"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         loadOrganizers();
