@@ -30,7 +30,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
-public class AdminArtistManagementViewController implements Initializable{
+public class AdminVenueManagementViewController implements Initializable{
     @FXML
     private TableView<Event> eventTable;
 
@@ -60,7 +60,7 @@ public class AdminArtistManagementViewController implements Initializable{
 
     private ObservableList<Event> eventList = FXCollections.observableArrayList();
 
-    private int selectedArtistId;
+    private int selectedVenueId;
 
 
     @Override
@@ -81,7 +81,7 @@ public class AdminArtistManagementViewController implements Initializable{
 
         try (Connection conn = Database.connect();PreparedStatement preparedStatement = conn.prepareStatement(sql)){
 
-            preparedStatement.setInt(1, selectedArtistId);
+            preparedStatement.setInt(1, selectedVenueId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -108,9 +108,9 @@ public class AdminArtistManagementViewController implements Initializable{
     }
 
     @FXML
-    private void onReturnToArtistManagementClick(ActionEvent event){
+    private void onReturnVenueManagementClick(ActionEvent event){
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("/com/dbms/view/AdminArtistManagementWindow.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/dbms/view/AdminVenueManagementWindow.fxml"));
             Stage stage = (Stage) eventTable.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException e){
@@ -127,8 +127,8 @@ public class AdminArtistManagementViewController implements Initializable{
         alert.showAndWait();
     }
 
-    public void initData(Artist selectedArtist){
-        selectedArtistId = selectedArtist.getArtist_id();
+    public void initData(Venue selectedVenue){
+        selectedVenueId = selectedVenue.getVenue_id();
         loadEvents();
     }
 }
