@@ -23,7 +23,7 @@
             <Image url="@assets/loginPage-asset3.png" />
          </image>
       </ImageView>
-      <Button layoutX="263.0" layoutY="680.0" mnemonicParsing="false" onAction="#onUpdateClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="UPDATE" textFill="WHITE">
+      <Button layoutX="464.0" layoutY="578.0" mnemonicParsing="false" onAction="#onUpdateClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="UPDATE" textFill="WHITE">
          <font>
             <Font name="Inter 18pt Black" size="18.0" />
          </font>
@@ -34,7 +34,7 @@
                </color>
             </DropShadow>
          </effect></Button>
-      <Button layoutX="663.0" layoutY="578.0" mnemonicParsing="false" onAction="#onDeleteClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="DELETE" textFill="WHITE">
+      <Button layoutX="850.0" layoutY="578.0" mnemonicParsing="false" onAction="#onDeleteClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="DELETE" textFill="WHITE">
          <font>
             <Font name="Inter 18pt Black" size="18.0" />
          </font>
@@ -45,7 +45,7 @@
                </color>
             </DropShadow>
          </effect></Button>
-      <Button layoutX="663.0" layoutY="680.0" mnemonicParsing="false" onAction="#onReturnToMainMenuClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="RETURN TO MAIN MENU" textFill="WHITE">
+      <Button layoutX="657.0" layoutY="675.0" mnemonicParsing="false" onAction="#onReturnToMainMenuClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="RETURN TO MAIN MENU" textFill="WHITE">
          <font>
             <Font name="Inter 18pt Black" size="18.0" />
          </font>
@@ -68,12 +68,12 @@
       </Label>
       <TableView fx:id="artistTable" layoutX="75.0" layoutY="125.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1050.0" style="-fx-background-color: #36344F; -fx-text-fill: #FFFFFF;">
         <columns>
-          <TableColumn fx:id="artistIdColumn" prefWidth="128.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="ARTIST ID" />
-          <TableColumn fx:id="nameColumn" prefWidth="221.59996032714844" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="NAME" />
-            <TableColumn fx:id="emailColumn" prefWidth="208.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="EMAIL" />
-            <TableColumn fx:id="genreColumn" prefWidth="137.5999755859375" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="GENRE" />
-            <TableColumn fx:id="companyColumn" prefWidth="240.79998779296875" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="MANAGEMENT COMPANY" />
-            <TableColumn fx:id="statusColumn" prefWidth="111.99993896484375" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="GENRE" />
+          <TableColumn fx:id="artistIdColumn" prefWidth="164.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="ARTIST ID" />
+          <TableColumn fx:id="nameColumn" prefWidth="202.40000915527344" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="NAME" />
+            <TableColumn fx:id="emailColumn" prefWidth="175.20004272460938" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="EMAIL" />
+            <TableColumn fx:id="genreColumn" prefWidth="141.5999755859375" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="GENRE" />
+            <TableColumn fx:id="companyColumn" prefWidth="237.59991455078125" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="MANAGEMENT COMPANY" />
+            <TableColumn fx:id="statusColumn" prefWidth="128.00006103515625" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="STATUS" />
         </columns>
          <effect>
             <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
@@ -83,7 +83,19 @@
             </DropShadow>
          </effect>
       </TableView>
-      <Button layoutX="263.0" layoutY="578.0" mnemonicParsing="false" onAction="#onAddClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="ADD" textFill="WHITE">
+      <Button layoutX="78.0" layoutY="578.0" mnemonicParsing="false" onAction="#onAddClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="ADD" textFill="WHITE">
+         <font>
+            <Font name="Inter 18pt Black" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.75" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+      <Button layoutX="270.0" layoutY="675.0" mnemonicParsing="false" onAction="#onViewClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="VIEW" textFill="WHITE">
          <font>
             <Font name="Inter 18pt Black" size="18.0" />
          </font>

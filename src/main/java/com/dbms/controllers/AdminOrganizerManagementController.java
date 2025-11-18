@@ -10,10 +10,7 @@ import java.sql.Statement;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import javafx.scene.Node;
-
-import com.dbms.models.Artist;
-import com.dbms.models.Customer;
+import com.dbms.models.Organizer;
 import com.dbms.utils.Database;
 
 import javafx.collections.FXCollections;
@@ -33,62 +30,67 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class AdminArtistManagementController implements Initializable {
+public class AdminOrganizerManagementController implements Initializable {
     @FXML
-    private TableView<Artist> artistTable;
+    private TableView<Organizer> organizerTable;
 
     @FXML
-    private TableColumn<Artist, Integer> artistIdColumn;
+    private TableColumn<Organizer, Integer> organizerIdColumn;
 
     @FXML
-    private TableColumn<Artist, String> nameColumn;
+    private TableColumn<Organizer, String> nameColumn;
 
     @FXML
-    private TableColumn<Artist, String> emailColumn;
+    private TableColumn<Organizer, Integer> emailColumn;
 
     @FXML
-    private TableColumn<Artist, String> genreColumn;
+    private TableColumn<Organizer, String> cityColumn;
 
     @FXML
-    private TableColumn<Artist, String> companyColumn;
+    private TableColumn<Organizer, String> countryColumn;
 
     @FXML
-    private TableColumn<Artist, String> statusColumn;
+    private TableColumn<Organizer, String> regionColumn;
 
-    private ObservableList<Artist> artistList = FXCollections.observableArrayList();
+    @FXML
+    private TableColumn<Organizer, String> statusColumn;
+
+    private ObservableList<Organizer> organizerList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-        artistIdColumn.setCellValueFactory(new PropertyValueFactory<>("artist_id"));
+        organizerIdColumn.setCellValueFactory(new PropertyValueFactory<>("organizer_id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-        genreColumn.setCellValueFactory(new PropertyValueFactory<>("genre"));
-        companyColumn.setCellValueFactory(new PropertyValueFactory<>("management_company"));
+        cityColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
+        countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
+        regionColumn.setCellValueFactory(new PropertyValueFactory<>("region"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        loadArtists();
+        loadOrganizers();
     }
 
-    private void loadArtists(){
-        artistList.clear();
-        String sql = "SELECT artist_id, name, email, genre, management_company, status FROM ARTIST";
+    private void loadOrganizers(){
+        organizerList.clear();
+        String sql = "SELECT organizer_id, name, email, city, country, region, status FROM ORGANIZER";
 
         try (Connection conn = Database.connect();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql)){
 
             while (rs.next()){
-                artistList.add(new Artist(
-                    rs.getInt("artist_id"),
+                organizerList.add(new Organizer(
+                    rs.getInt("organizer_id"),
                     rs.getString("name"),
                     rs.getString("email"),
-                    rs.getString("genre"),
-                    rs.getString("management_company"),
+                    rs.getString("city"),
+                    rs.getString("country"),
+                    rs.getString("region"),
                     rs.getString("status")
                 ));
             }
 
-            artistTable.setItems(artistList);
+            organizerTable.setItems(organizerList);
 
         } catch (SQLException e){
             e.printStackTrace();
@@ -98,39 +100,39 @@ public class AdminArtistManagementController implements Initializable {
 
     @FXML
     private void onDeleteClick(ActionEvent event){
-        Artist selectedArtist = artistTable.getSelectionModel().getSelectedItem();
+        Organizer selectedOrganizer = organizerTable.getSelectionModel().getSelectedItem();
 
-        if (selectedArtist == null){
-            showAlert(Alert.AlertType.WARNING, "No Selection", "Please select an artist to Inactive");
+        if (selectedOrganizer == null){
+            showAlert(Alert.AlertType.WARNING, "No Selection", "Please select a organizer to Inactive");
             return;
         }
 
-        if (selectedArtist.getStatus().equalsIgnoreCase("Inactive")){
-            showAlert(Alert.AlertType.INFORMATION, "Already Inactive", "This artist is already 'Inactive'.");
+        if (selectedOrganizer.getStatus().equalsIgnoreCase("Inactive")){
+            showAlert(Alert.AlertType.INFORMATION, "Already Inactive", "This organizer is already 'Inactive'.");
             return;
         }
 
         Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmAlert.setTitle("Confirm Deletion");
-        confirmAlert.setHeaderText("Are you sure you want to delete this artist?");
-        confirmAlert.setContentText(selectedArtist.getName());
+        confirmAlert.setHeaderText("Are you sure you want to delete this organizer?");
+        confirmAlert.setContentText(selectedOrganizer.getName());
 
         Optional<ButtonType> result = confirmAlert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK){
-            String sql = "UPDATE Artist SET status = 'Inactive' WHERE artist_id = ?";
+            String sql = "UPDATE Organizer SET status = 'Inactive' WHERE organizer_id = ?";
 
             try (Connection conn = Database.connect();
                  PreparedStatement pstmt = conn.prepareStatement(sql)){
 
-                    pstmt.setInt(1, selectedArtist.getArtist_id());
+                    pstmt.setInt(1, selectedOrganizer.getOrganizer_id());
                     int rowsAffected = pstmt.executeUpdate();
 
                     if (rowsAffected > 0){
-                        showAlert(Alert.AlertType.INFORMATION, "Success", "Artist deleted.");
-                        loadArtists();
+                        showAlert(Alert.AlertType.INFORMATION, "Success", "Organizer deleted.");
+                        loadOrganizers();
                     } else {
-                        showAlert(Alert.AlertType.ERROR, "Error", "Failed to delete artist.");
+                        showAlert(Alert.AlertType.ERROR, "Error", "Failed to delete organizer.");
                     }
                  } catch (SQLException e) {
                     e.printStackTrace();
@@ -141,20 +143,20 @@ public class AdminArtistManagementController implements Initializable {
 
     @FXML
     private void onUpdateClick(ActionEvent event){
-        Artist selectedArtist = artistTable.getSelectionModel().getSelectedItem();
+        Organizer selectedOrganizer = organizerTable.getSelectionModel().getSelectedItem();
 
-        if (selectedArtist == null){
-            showAlert(Alert.AlertType.WARNING, "No Selection", "Please select an artist to update.");
+        if (selectedOrganizer == null){
+            showAlert(Alert.AlertType.WARNING, "No Selection", "Please select a organizer to update.");
             return;
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminArtistManagementUpdateWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminOrganizerManagementUpdateWindow.fxml"));
             Parent root = loader.load();
 
-            AdminArtistManagementUpdateController formUpdateController = loader.getController();
+            AdminOrganizerManagementUpdateController formUpdateController = loader.getController();
 
-            formUpdateController.initData(selectedArtist);
+            formUpdateController.initData(selectedOrganizer);
 
             Stage stage = new Stage();
             Image logo = new Image("com/dbms/view/assets/logo.png");
@@ -162,7 +164,7 @@ public class AdminArtistManagementController implements Initializable {
             stage.getIcons().add(logo);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
-            stage.setOnHidden(e -> loadArtists());
+            stage.setOnHidden(e -> loadOrganizers());
             stage.showAndWait();
 
         } catch (IOException e){
@@ -175,7 +177,7 @@ public class AdminArtistManagementController implements Initializable {
     private void onReturnToMainMenuClick(ActionEvent event){
         try{
             Parent root = FXMLLoader.load(getClass().getResource("/com/dbms/view/AdminWindow.fxml"));
-            Stage stage = (Stage) artistTable.getScene().getWindow();
+            Stage stage = (Stage) organizerTable.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException e){
             e.printStackTrace();
@@ -186,7 +188,7 @@ public class AdminArtistManagementController implements Initializable {
     @FXML
     private void onAddClick(ActionEvent event){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminArtistManagementAddWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminOrganizerManagementAddWindow.fxml"));
             Parent root = loader.load();
 
             Stage stage = new Stage();
@@ -196,38 +198,12 @@ public class AdminArtistManagementController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
             stage.setResizable(false);
-            stage.setOnHidden(e -> loadArtists());
+            stage.setOnHidden(e -> loadOrganizers());
             stage.showAndWait();
 
         } catch (IOException e){
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Error", "Could not load the add artist management: " + e.getMessage());
-        }
-    }
-
-    @FXML
-    private void onViewClick(ActionEvent event){
-        Artist selectedArtist = artistTable.getSelectionModel().getSelectedItem();
-
-        if (selectedArtist == null){
-            showAlert(Alert.AlertType.WARNING, "No Selection", "Please select a artist to view.");
-            return;
-        }
-
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminArtistManagementViewWindow.fxml"));
-            Parent root = loader.load();
-
-            AdminArtistManagementViewController formUpdateController = loader.getController();
-
-            formUpdateController.initData(selectedArtist);
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-        }
-        catch(IOException e){
-            e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Error", "Could not load the view artist: " + e.getMessage());
+            showAlert(Alert.AlertType.ERROR, "Error", "Could not load the add organizer management: " + e.getMessage());
         }
     }
 
@@ -237,5 +213,5 @@ public class AdminArtistManagementController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }  
+    }
 }

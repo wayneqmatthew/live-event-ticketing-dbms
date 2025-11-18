@@ -75,9 +75,9 @@ CREATE TABLE Organizer (
     organizer_id INT PRIMARY KEY AUTO_INCREMENT,		-- Unique ID for each organizer
     name VARCHAR (100),                 -- name of organizer
     email VARCHAR (255),                -- email of organizer
-    region VARCHAR(50),					-- Region where it is located
+	city VARCHAR(50),					-- City where it is located
     country VARCHAR(50),				-- Country where it is located
-    city VARCHAR(50),					-- City where it is located
+    region VARCHAR(50),					-- Region where it is located
     status VARCHAR(15)                  -- status
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -162,14 +162,14 @@ DROP TABLE IF EXISTS CommissionPayout;
 /*!40101 SET @saved_cs_client = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE CommissionPayout (
-    payout_ref_id INT PRIMARY KEY AUTO_INCREMENT,			-- Unique ID for each payout
+    payout_id INT PRIMARY KEY AUTO_INCREMENT,			-- Unique ID for each payout
     artist_id INT,							-- artist_id for artist payout
     organizer_id INT,                       -- organizer_id for organizer payout
-    commission_amount DECIMAL(10,2),		-- Total commission amount
-    total_ticket_sales INT,					-- Total sales from tickets
+    event_id INT,                           -- event_id for organizer payout
     commission_percentage DECIMAL(5,2),		-- Commission rate of the organizer/artist
     payout_date DATE,						-- Date when the amount was paid
     FOREIGN KEY (artist_id) REFERENCES Artist(artist_id),
-    FOREIGN KEY (organizer_id) REFERENCES Organizer(organizer_id)
+    FOREIGN KEY (organizer_id) REFERENCES Organizer(organizer_id),
+    FOREIGN KEY (event_id) REFERENCES Event(event_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

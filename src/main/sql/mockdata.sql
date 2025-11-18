@@ -106,12 +106,12 @@ UNLOCK TABLES;
 -- Dumping data for table Ticket
 -- ==============================
 /*!40000 ALTER TABLE Ticket DISABLE KEYS */;
-INSERT INTO Ticket (event_id, customer_id, seat_number, purchase_date, price, status) VALUES
-(4, 5, 'J39', '2025-03-28', 4700.00, 'Cancelled'),
-(3, 2, 'B20', '2026-02-28', 15699.00, 'Active'),
-(1, 9, 'H27', '2026-12-03', 5700.00, 'Active'),
-(5, 10, 'A13', '2025-12-03', 7400.00, 'Cancelled'),
-(5, 8, 'E30', '2026-09-22', 15100.00, 'Active');
+INSERT INTO Ticket (event_id, customer_id, purchase_date, price, status) VALUES
+(4, 5, '2025-03-28', 4700.00, 'Cancelled'),
+(3, 2, '2026-02-28', 15699.00, 'Active'),
+(1, 9, '2026-12-03', 5700.00, 'Active'),
+(5, 10, '2025-12-03', 7400.00, 'Cancelled'),
+(5, 8, '2026-09-22', 15100.00, 'Active');
 /*!40000 ALTER TABLE Ticket ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,7 +129,8 @@ UNLOCK TABLES;
 -- Dumping data for table CommissionPayout
 -- ========================================
 /*!40000 ALTER TABLE CommissionPayout DISABLE KEYS */;
-INSERT INTO CommissionPayout (artist_id, organizer_id, commission_amount, total_ticket_sales, commission_percentage, payout_date) VALUES
-(2, NULL, 195000.00, 1500000.00, 13.00, '2025-04-01'),
-(NULL, 6, 1050000.00, 7000000.00, 15.00, '2025-11-22'),
-(NULL, 7, 468000.00, 39000000.00, 12.00, '2025-08-12');
+INSERT INTO CommissionPayout (artist_id, organizer_id, event_id, commission_percentage, payout_date) VALUES
+(1, 1, 1, 13.00, '2025-04-01'),
+(3, 1, 1, 15.00, '2025-11-22'),
+(3, 2, 1, 12.00, '2025-08-12');
+UNLOCK TABLES;

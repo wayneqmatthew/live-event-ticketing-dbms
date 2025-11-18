@@ -24,6 +24,8 @@ public class Venue {
         this.status = new SimpleStringProperty(status);
     }
 
+    
+
     //Property getters
     public IntegerProperty venue_idProperty(){return venue_id;}
     public StringProperty nameProperty(){return name;}
