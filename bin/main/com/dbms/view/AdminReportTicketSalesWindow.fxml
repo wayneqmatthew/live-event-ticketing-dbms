@@ -12,7 +12,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #1F1D36;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dbms.controllers.CancellationSummaryReportController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #1F1D36;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dbms.controllers.AdminCustomerManagementViewController">
    <children>
       <ImageView fitHeight="1204.0" fitWidth="1200.0" layoutY="-400.0" opacity="0.25" preserveRatio="true">
          <image>
@@ -24,7 +24,7 @@
             <Image url="@assets/loginPage-asset3.png" />
          </image>
       </ImageView>
-      <Button fx:id="onBackClick" layoutX="411.0" layoutY="627.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="379.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="RETURN TO REPORT MENU" textFill="WHITE">
+      <Button layoutX="411.0" layoutY="627.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="379.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="RETURN TO REPORT MENU" textFill="WHITE">
          <font>
             <Font name="Inter 18pt Black" size="18.0" />
          </font>
@@ -45,12 +45,12 @@
             <Font name="Inter 18pt Bold" size="20.0" />
          </font>
       </Label>
-      <TableView fx:id="reportTable" fixedCellSize="0.0" layoutX="75.0" layoutY="125.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1040.0" style="-fx-background-color: #36344F; -fx-text-fill: #FFFFFF;">
+      <TableView layoutX="75.0" layoutY="125.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1050.0" style="-fx-background-color: #36344F; -fx-text-fill: #FFFFFF;">
         <columns>
-          <TableColumn fx:id="eventIdColumn" prefWidth="350.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="EVENT ID" />
-          <TableColumn fx:id="eventNameColumn" prefWidth="350.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="EVENT NAME" />
-            <TableColumn fx:id="ticketsRefundedColumn" prefWidth="350.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="TICKETS REFUNDED" />
-            <TableColumn prefWidth="75.0" text="Column X" />
+          <TableColumn prefWidth="262.5" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="EVENT ID " />
+          <TableColumn prefWidth="262.5" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="EVENT NAME" />
+            <TableColumn prefWidth="262.5" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="TICKETS SOLD" />
+            <TableColumn prefWidth="262.5" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="TOTAL REVENUE" />
         </columns>
          <effect>
             <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
@@ -60,7 +60,7 @@
             </DropShadow>
          </effect>
       </TableView>
-      <DatePicker fx:id="datePicker" blendMode="SCREEN" cache="true" editable="true" layoutX="494.0" layoutY="570.0" onAction="#onGenerateReportClick" prefHeight="30.0" prefWidth="212.0" promptText="Date" style="-fx-background-color: #36344F; -fx-text-fill: white; -fx-background-radius: 50;">
+      <DatePicker blendMode="SCREEN" cache="true" editable="true" layoutX="494.0" layoutY="570.0" prefHeight="30.0" prefWidth="212.0" promptText="Date" style="-fx-background-color: #36344F; -fx-text-fill: white; -fx-background-radius: 50;">
          <effect>
             <DropShadow height="5.0" offsetY="3.0" radius="2.0" width="5.0">
                <color>

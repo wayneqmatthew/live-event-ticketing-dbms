@@ -23,7 +23,7 @@
             <Image url="@assets/loginPage-asset3.png" />
          </image>
       </ImageView>
-      <Button layoutX="263.0" layoutY="680.0" mnemonicParsing="false" onAction="#onUpdateClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="UPDATE" textFill="WHITE">
+      <Button layoutX="464.0" layoutY="578.0" mnemonicParsing="false" onAction="#onUpdateClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="UPDATE" textFill="WHITE">
          <font>
             <Font name="Inter 18pt Black" size="18.0" />
          </font>
@@ -34,7 +34,7 @@
                </color>
             </DropShadow>
          </effect></Button>
-      <Button layoutX="663.0" layoutY="578.0" mnemonicParsing="false" onAction="#onDeleteClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="DELETE" textFill="WHITE">
+      <Button layoutX="850.0" layoutY="578.0" mnemonicParsing="false" onAction="#onDeleteClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="DELETE" textFill="WHITE">
          <font>
             <Font name="Inter 18pt Black" size="18.0" />
          </font>
@@ -45,7 +45,7 @@
                </color>
             </DropShadow>
          </effect></Button>
-      <Button layoutX="663.0" layoutY="680.0" mnemonicParsing="false" onAction="#onReturnToMainMenuClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="RETURN TO MAIN MENU" textFill="WHITE">
+      <Button layoutX="657.0" layoutY="675.0" mnemonicParsing="false" onAction="#onReturnToMainMenuClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="RETURN TO MAIN MENU" textFill="WHITE">
          <font>
             <Font name="Inter 18pt Black" size="18.0" />
          </font>
@@ -84,7 +84,19 @@
             </DropShadow>
          </effect>
       </TableView>
-      <Button layoutX="263.0" layoutY="578.0" mnemonicParsing="false" onAction="#onAddClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="ADD" textFill="WHITE">
+      <Button layoutX="78.0" layoutY="578.0" mnemonicParsing="false" onAction="#onAddClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="ADD" textFill="WHITE">
+         <font>
+            <Font name="Inter 18pt Black" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.75" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+      <Button layoutX="260.0" layoutY="675.0" mnemonicParsing="false" onAction="#onViewClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="VIEW" textFill="WHITE">
          <font>
             <Font name="Inter 18pt Black" size="18.0" />
          </font>
