@@ -64,8 +64,6 @@ public class OrganizerViewEventController implements Initializable{
 
     private ObservableList<Event> eventList = FXCollections.observableArrayList();
 
-    private int organizerId;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
@@ -78,6 +76,8 @@ public class OrganizerViewEventController implements Initializable{
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         capacityColumn.setCellValueFactory(new PropertyValueFactory<>("capacity"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+    
+        loadEvents();
     }
 
     private void loadEvents(){
@@ -86,7 +86,7 @@ public class OrganizerViewEventController implements Initializable{
 
         try (Connection conn = Database.connect();PreparedStatement preparedStatement = conn.prepareStatement(sql)){
 
-            preparedStatement.setInt(1, organizerId);
+            preparedStatement.setInt(1, LoginController.getIdNumber());
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -117,7 +117,7 @@ public class OrganizerViewEventController implements Initializable{
         try (Connection conn = Database.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, organizerId);
+            pstmt.setInt(1, LoginController.getIdNumber());
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
@@ -132,7 +132,7 @@ public class OrganizerViewEventController implements Initializable{
 
     @FXML
     private void onCreateClick(ActionEvent event){
-        if (!isOrganizerActive(organizerId)) {
+        if (!isOrganizerActive(LoginController.getIdNumber())) {
             showAlert(Alert.AlertType.WARNING, "Access Denied", "Only active organizers can create events.");
             return;
         }
@@ -142,7 +142,6 @@ public class OrganizerViewEventController implements Initializable{
             Parent root = loader.load();
 
             OrganizerCreateEventController organizerCreateEventController = loader.getController();
-            organizerCreateEventController.setOrganizerId(organizerId);
             
             Stage stage = new Stage();
             Image logo = new Image("com/dbms/view/assets/logo.png");
@@ -168,7 +167,6 @@ public class OrganizerViewEventController implements Initializable{
             Parent root = loader.load();
 
             OrganizerController organizerController = loader.getController();
-            organizerController.setOrganizerId(organizerId);
 
             Stage stage = (Stage) eventTable.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -185,10 +183,5 @@ public class OrganizerViewEventController implements Initializable{
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    public void setOrganizerId(int organizerId) {
-        this.organizerId = organizerId;
-        loadEvents();
     }
 }

@@ -13,11 +13,6 @@ public class OrganizerController {
     @FXML
     private Pane rootPane;
 
-    private int organizerId;
-
-    public void setOrganizerId(int organizerId) {
-        this.organizerId = organizerId;
-    }
 
     @FXML
     private void onViewClick(){
@@ -26,7 +21,6 @@ public class OrganizerController {
             Parent root = loader.load();
 
             OrganizerViewEventController eventController = loader.getController();
-            eventController.setOrganizerId(organizerId);
 
             Scene scene = new Scene(root);
             Stage primaryStage = (Stage) rootPane.getScene().getWindow();

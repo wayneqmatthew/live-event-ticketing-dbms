@@ -36,15 +36,14 @@ public class LoginController implements Initializable{
 
     private String identifier;
     private String password;
-    
+
+    private static int idNumber;
 
     private final String adminUsername = "admin";
     private final String adminPassword = "admin";
 
     private final String[] userTypeCollection = {"CUSTOMER", "ARTIST", "ORGANIZER", "ADMIN"};
     private String userType;
-
-    private int organizerId;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
@@ -56,11 +55,6 @@ public class LoginController implements Initializable{
         userType = userTypeChoiceBox.getValue();
     }
 
-    public void setOrganizerId(int organizerId) {
-        this.organizerId = organizerId;
-    }
-
-
     @FXML
     private void onSubmitClick(ActionEvent event){
         try{
@@ -71,6 +65,7 @@ public class LoginController implements Initializable{
             switch(userType){
                 case "ADMIN":
                     if(identifier.equals(adminUsername) && password.equals(adminPassword)){
+
                         FXMLLoader loaderAdmin = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminWindow.fxml"));
                         Parent rootAdmin = loaderAdmin.load();
                         Scene sceneAdmin = new Scene(rootAdmin);
@@ -85,17 +80,17 @@ public class LoginController implements Initializable{
                     break;
                 
                 case "ORGANIZER":
-                    if (authenticateOrganizer(identifier) && password.equals(adminPassword)) {
+                    if(authenticateOrganizer(identifier) && password.equals(adminPassword)){
+                        idNumber = Integer.parseInt(identifier);
+
                         FXMLLoader loaderOrganizer = new FXMLLoader(getClass().getResource("/com/dbms/view/OrganizerWindow.fxml"));
                         Parent rootOrganizer = loaderOrganizer.load();
-
-                        OrganizerController controller = loaderOrganizer.getController();
-                        controller.setOrganizerId(Integer.parseInt(identifier));
-
                         Scene sceneOrganizer = new Scene(rootOrganizer);
                         Stage primaryStageOrganizer = (Stage) rootPane.getScene().getWindow();
+
                         primaryStageOrganizer.setScene(sceneOrganizer);
-                    } else {
+                    }
+                    else{
                         showAlert(AlertType.ERROR, "Error", "Failed to authenticate.");
                         return;
                     }
@@ -103,6 +98,8 @@ public class LoginController implements Initializable{
                 
                 case "ARTIST":
                     if(authenticateArtist(identifier) && password.equals(adminPassword)){
+                        idNumber = Integer.parseInt(identifier);
+
                         FXMLLoader loaderArtist = new FXMLLoader(getClass().getResource("/com/dbms/view/ArtistWindow.fxml"));
                         Parent rootArtist = loaderArtist.load();
                         Scene sceneArtist = new Scene(rootArtist);
@@ -118,6 +115,8 @@ public class LoginController implements Initializable{
                 
                 case "CUSTOMER":
                     if(authenticateCustomer(identifier) && password.equals(adminPassword)){
+                        idNumber = Integer.parseInt(identifier);
+
                         FXMLLoader loaderCustomer = new FXMLLoader(getClass().getResource("/com/dbms/view/CustomerWindow.fxml"));
                         Parent rootCustomer = loaderCustomer.load();
                         Scene sceneCustomer = new Scene(rootCustomer);
@@ -201,7 +200,7 @@ public class LoginController implements Initializable{
         alert.showAndWait();
     }
 
-    public String getIdentifier(){
-        return identifier;
+    public static int getIdNumber(){
+        return idNumber;
     }
 }
