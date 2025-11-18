@@ -1,4 +1,4 @@
-package com.dbms.models;
+package main.java.com.dbms.models;
 
 import java.time.LocalDate;
 

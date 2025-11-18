@@ -66,7 +66,7 @@ public class CancellationController {
             return;
         }
 
-        String sql = "SELECT t.ticket_id, t.price, t.purchase_date, t.status, e.event_name " +
+        String sql = "SELECT t.ticket_id, t.price, t.purchase_date, t.status, e.event_name, e.status AS event_status " +
                      "FROM Ticket t " +
                      "JOIN Event e ON t.event_id = e.event_id " +
                      "WHERE t.ticket_id = ?";
@@ -78,11 +78,15 @@ public class CancellationController {
 
                 if (rs.next()) {
                     String status = rs.getString("status");
+                    String eventStatus = rs.getString("event_status");
                     double price = rs.getDouble("price");
                     String eventName = rs.getString("event_name");
                     String purchaseDate = rs.getString("purchase_date");
 
-                    if (status.equalsIgnoreCase("Cancelled")) {
+                    if (eventStatus.equalsIgnoreCase("Done")){
+                        showAlert(Alert.AlertType.ERROR, "Event Over", "This ticket is for an event that has already finished. It is not eligible for a refund.");
+                    }
+                    else if (status.equalsIgnoreCase("Cancelled")) {
                         showAlert(Alert.AlertType.INFORMATION, "Already Cancelled", "This ticket (ID: " + ticketId + ") has already been cancelled.");
                     }
                     else {
@@ -117,7 +121,7 @@ public class CancellationController {
         Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmAlert.setTitle("Confirm Cancellation");
         confirmAlert.setHeaderText("Are you sure you want to cancel this ticket?");
-        confirmAlert.setContentText(String.format("Ticket ID %d\nRefund Amount: %.2f", this.foundTicketId, this.foundTicketPrice)); 
+        confirmAlert.setContentText(String.format("Ticket ID: %d\nRefund Amount: %.2f", this.foundTicketId, this.foundTicketPrice)); 
 
         Optional<ButtonType> result = confirmAlert.showAndWait();
 
@@ -174,7 +178,7 @@ public class CancellationController {
     @FXML
     private void onBackClick(ActionEvent event){
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("address of menu"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/dbms/view/CustomerWindow.fxml"));
 
             Stage stage = (Stage) ticketIdField.getScene().getWindow();
             stage.setScene(new Scene(root));

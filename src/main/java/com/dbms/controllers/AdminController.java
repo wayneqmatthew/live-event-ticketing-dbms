@@ -17,19 +17,19 @@ public class AdminController {
 
     @FXML
     private void onArtistManagementClick(ActionEvent event){
-        // try{
-        //     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/.fxml"));
-        //     Parent root = loader.load();
-        //     Scene scene = new Scene(root);
-        //     Stage primaryStage = (Stage) rootPane.getScene().getWindow();
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminArtistManagementWindow.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage primaryStage = (Stage) rootPane.getScene().getWindow();
 
-        //     primaryStage.setScene(scene);
-        // }
+            primaryStage.setScene(scene);
+        }
 
-        // catch(Exception e){
-        //     e.printStackTrace();
-        //     showAlert(AlertType.ERROR, "Error", "Failed to load Artist Management: " + e.getMessage());
-        // }
+        catch(Exception e){
+            e.printStackTrace();
+            showAlert(AlertType.ERROR, "Error", "Failed to load Artist Management: " + e.getMessage());
+        }
     }
 
     @FXML
