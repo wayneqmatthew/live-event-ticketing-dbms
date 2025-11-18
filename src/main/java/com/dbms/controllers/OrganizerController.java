@@ -13,6 +13,24 @@ public class OrganizerController {
     @FXML
     private Pane rootPane;
 
+
+    @FXML
+    private void onPayoutClick(){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/CommissionPayoutWindow.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage primaryStage = (Stage) rootPane.getScene().getWindow();
+
+            primaryStage.setScene(scene);
+        }
+
+        catch(Exception e){
+            e.printStackTrace();
+            showAlert(AlertType.ERROR, "Error", "Failed to load payout: " + e.getMessage());
+        }
+    }
+
     @FXML
     private void onLogOutClick(){
         try{

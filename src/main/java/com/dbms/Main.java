@@ -19,7 +19,7 @@ public class Main extends Application{
         Font.loadFont(getClass().getResourceAsStream("/com/dbms/view/assets/Inter_18pt-Bold.ttf"), 14);
         Font.loadFont(getClass().getResourceAsStream("/com/dbms/view/assets/Inter_18pt-Black.ttf"), 14);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/LoginWindow.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/OrganizerWindow.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         Image logo = new Image("com/dbms/view/assets/logo.png");
