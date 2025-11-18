@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="320.0" style="-fx-background-color: #1F1D36;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dbms.controllers.AdminCustomerManagementAddController">
+   <children>
+      <Label layoutX="25.0" layoutY="30.0" prefHeight="30.0" prefWidth="270.0" text="Create a customer" textFill="WHITE">
+         <font>
+            <Font name="Inter 18pt Black" size="24.0" />
+         </font></Label>
+      <TextField fx:id="lastNameAddField" layoutX="52.0" layoutY="77.0" promptText="Last Name" style="-fx-background-color: #36344F; -fx-text-fill: white; -fx-background-radius: 50;">
+         <font>
+            <Font name="Inter 18pt Bold" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow height="5.0" offsetY="3.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.5" />
+               </color>
+            </DropShadow>
+         </effect></TextField>
+      <Button fx:id="saveAddButton" layoutX="42.0" layoutY="318.0" mnemonicParsing="false" onAction="#onSaveClick" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="SAVE" textFill="WHITE">
+         <font>
+            <Font name="Inter 18pt Black" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow height="5.0" offsetY="3.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.5" />
+               </color>
+            </DropShadow>
+         </effect></Button>
+      <Button layoutX="188.0" layoutY="318.0" mnemonicParsing="false" onAction="#onCancelClick" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="CANCEL" textFill="WHITE">
+         <font>
+            <Font name="Inter 18pt Black" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow height="5.0" offsetY="3.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.5" />
+               </color>
+            </DropShadow>
+         </effect></Button>
+      <TextField fx:id="firstNameAddField" layoutX="52.0" layoutY="122.0" promptText="First Name" style="-fx-background-color: #36344F; -fx-text-fill: white; -fx-background-radius: 50;">
+         <font>
+            <Font name="Inter 18pt Bold" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow height="5.0" offsetY="3.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.5" />
+               </color>
+            </DropShadow>
+         </effect>
+      </TextField>
+      <TextField fx:id="emailAddField" layoutX="52.0" layoutY="167.0" promptText="Email" style="-fx-background-color: #36344F; -fx-text-fill: white; -fx-background-radius: 50;">
+         <font>
+            <Font name="Inter 18pt Bold" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow height="5.0" offsetY="3.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.5" />
+               </color>
+            </DropShadow>
+         </effect>
+      </TextField>
+      <TextField fx:id="phoneNumberAddField" layoutX="52.0" layoutY="212.0" promptText="Phone Number" style="-fx-background-color: #36344F; -fx-text-fill: white; -fx-background-radius: 50;">
+         <font>
+            <Font name="Inter 18pt Bold" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow height="5.0" offsetY="3.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.5" />
+               </color>
+            </DropShadow>
+         </effect>
+      </TextField>
+      <DatePicker fx:id="dateAddField" blendMode="SOFT_LIGHT" cache="true" editable="true" layoutX="53.0" layoutY="257.0" prefHeight="30.0" prefWidth="215.0" promptText="Date" style="-fx-background-color: #36344F; -fx-text-fill: white; -fx-background-radius: 50;">
+         <effect>
+            <DropShadow height="5.0" offsetY="3.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.5" />
+               </color>
+            </DropShadow>
+         </effect>
+      </DatePicker>
+   </children>
+</Pane>
