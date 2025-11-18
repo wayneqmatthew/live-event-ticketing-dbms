@@ -1,30 +1,25 @@
 package com.dbms.models;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import java.sql.Date;
+
+import javafx.beans.property.*;
 
 public class CancellationReport {
-    private final IntegerProperty cancellationId;
-    private final IntegerProperty ticketId;
+    private final IntegerProperty eventId;
     private final StringProperty eventName;
-    private final DoubleProperty refundAmount;
-    private final StringProperty cancellationDate;
+    private final DoubleProperty totalRefunded; // Only the SUM remains
 
-    public CancellationReport(int cancellationId, int ticketId, String eventName, double refundAmount, Date cancellationDate){
-        this.cancellationId = new SimpleIntegerProperty(cancellationId);
-        this.ticketId = new SimpleIntegerProperty(ticketId);
+    public CancellationReport(int eventId, String eventName, double total) {
+        this.eventId = new SimpleIntegerProperty(eventId);
         this.eventName = new SimpleStringProperty(eventName);
-        this.refundAmount = new SimpleDoubleProperty(refundAmount);
-        this.cancellationDate = new SimpleStringProperty(cancellationDate.toString());
+        this.totalRefunded = new SimpleDoubleProperty(total);
     }
 
-    public IntegerProperty cancellationIdProperty(){ return cancellationId;}
-    public IntegerProperty ticketIdProperty(){ return ticketId;}
-    public StringProperty eventNameProperty(){ return eventName;}
-    public DoubleProperty refuundAmountProperty(){ return refundAmount;}
-    public StringProperty cancellationDateProperty(){ return cancellationDate;}
+    // Getters for PropertyValueFactory
+    public int getEventId() { return eventId.get(); }
+    public String getEventName() { return eventName.get(); }
+    public double getTotalRefunded() { return totalRefunded.get(); }
+
+    // Property accessors
+    public IntegerProperty eventIdProperty() { return eventId; }
+    public StringProperty eventNameProperty() { return eventName; }
+    public DoubleProperty totalRefundedProperty() { return totalRefunded; }
 }

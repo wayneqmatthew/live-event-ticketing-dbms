@@ -31,18 +31,26 @@ public class CustomerController {
         }
     }
 
-    @FXML
-    private void onViewEventClick(){
 
+    @FXML
+    private void onCancelTicketClick(ActionEvent event){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/CustomerViewTicketsWindow.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage primaryStage = (Stage) rootPane.getScene().getWindow();
+
+            primaryStage.setScene(scene);
+        }
+
+        catch(Exception e){
+            e.printStackTrace();
+            showAlert(AlertType.ERROR, "Error", "Failed to load cancellation" + e.getMessage());
+        }
     }
 
     @FXML
-    private void onViewTicketClick(){
-        
-    }   
-
-    @FXML
-    private void onLogOutClick(ActionEvent event){
+    private void onLogOutClick(){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/LoginWindow.fxml"));
             Parent root = loader.load();
