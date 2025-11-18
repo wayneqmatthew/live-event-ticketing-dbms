@@ -13,6 +13,25 @@ public class OrganizerController {
     @FXML
     private Pane rootPane;
 
+    @FXML
+    private void onViewClick(){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/OrganizerViewEventWindow.fxml"));
+            Parent root = loader.load();
+
+            OrganizerViewEventController eventController = loader.getController();
+
+            Scene scene = new Scene(root);
+            Stage primaryStage = (Stage) rootPane.getScene().getWindow();
+
+            primaryStage.setScene(scene);
+        }
+
+        catch(Exception e){
+            e.printStackTrace();
+            showAlert(AlertType.ERROR, "Error", "Failed to view event window: " + e.getMessage());
+        }
+    }
 
     @FXML
     private void onPayoutClick(){
