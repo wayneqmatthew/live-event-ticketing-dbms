@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 
 import com.dbms.models.Artist;
 import com.dbms.models.Event;
+import com.dbms.models.Venue;
 import com.dbms.utils.Database;
 
 import javafx.fxml.FXML;
@@ -126,8 +127,8 @@ public class AdminArtistManagementViewController implements Initializable{
         alert.showAndWait();
     }
 
-    public void initData(Artist artist){
-        selectedArtistId = artist.getArtist_id();
+    public void initData(Artist selectedArtist){
+        selectedArtistId = selectedArtist.getArtist_id();
         loadEvents();
     }
 }

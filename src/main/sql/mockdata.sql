@@ -89,16 +89,16 @@ UNLOCK TABLES;
 -- Dumping data for table Event
 -- =============================
 /*!40000 ALTER TABLE Event DISABLE KEYS */;
-INSERT INTO Event (venue_id, artist_id, organizer_id, event_name, time, date, capacity, status) VALUES
-(7, 1, 3, 'The Eras Tour', '18:00:00', '2026-03-09', '70000', 'Upcoming'),
-(6, 2, 1, 'Short n Sweet Tour', '18:00:00', '2025-03-17', '1500', 'Done'),
-(5, 4, 6, 'Stage, Screen and Everything In Between', '19:00:00', '2026-06-18', 81500, 'Upcoming'),
-(3, 5, 4, 'Here and Now: Celebrating the Music of Jose Mari Chan', '17:00:00', '2025-11-25', 16000, 'Upcoming'),
-(3, 7, 4, 'Permission to Dance on Stage', '18:00:00', '2027-02-28', 16000, 'Upcoming'),
-(6, 1, 6, 'The Eras Tour', '19:00:00', '2025-10-28', 1500, 'Done'),
-(9, 10, 6, 'Lunar Theory World Tour', '20:00:00', '2025-05-14', 72300, 'Done'),
-(4, 8, 1, 'This is For: World Tour', '19:00:00', '2025-10-04', 68900, 'Done'),
-(1, 2, 7, 'Short n Sweet Tour', '18:00:00', '2025-07-18', '14500', 'Done');
+INSERT INTO Event (venue_id, artist_id, organizer_id, event_name, time, date, capacity, ticket_price , status) VALUES
+(7, 1, 3, 'The Eras Tour', '18:00:00', '2026-03-09', 70000, 3000.00,'Upcoming'),
+(6, 2, 1, 'Short n Sweet Tour', '18:00:00', '2025-03-17', '1500', 13000.50, 'Done'),
+(5, 4, 6, 'Stage, Screen and Everything In Between', '19:00:00', '2026-06-18', 81500, 2000.25,'Upcoming'),
+(3, 5, 4, 'Here and Now: Celebrating the Music of Jose Mari Chan', '17:00:00', '2025-11-25', 16000, 13000.50,'Upcoming'),
+(3, 7, 4, 'Permission to Dance on Stage', '18:00:00', '2027-02-28', 16000, 3000.00,'Upcoming'),
+(6, 1, 6, 'The Eras Tour', '19:00:00', '2025-10-28', 1500, 2000.25,'Done'),
+(9, 10, 6, 'Lunar Theory World Tour', '20:00:00', '2025-05-14', 72300, 13000.50,'Done'),
+(4, 8, 1, 'This is For: World Tour', '19:00:00', '2025-10-04', 68900, 16000,'Done'),
+(1, 2, 7, 'Short n Sweet Tour', '18:00:00', '2025-07-18', 14500, 3000.00,'Done');
 /*!40000 ALTER TABLE Event ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,6 +106,7 @@ UNLOCK TABLES;
 -- Dumping data for table Ticket
 -- ==============================
 /*!40000 ALTER TABLE Ticket DISABLE KEYS */;
+<<<<<<< HEAD
 INSERT INTO Ticket (event_id, customer_id, purchase_date, price, status) VALUES
 (4, 5,'2025-03-28', 4700.00, 'Cancelled'),
 (3, 2,'2026-02-28', 15699.00, 'Active'),
@@ -113,6 +114,14 @@ INSERT INTO Ticket (event_id, customer_id, purchase_date, price, status) VALUES
 (5, 10, '2025-12-03', 7400.00, 'Cancelled'),
 (5, 8, '2026-09-22', 15100.00, 'Active'),
 (5, 8, '2026-09-22', 15100.00, 'Active');
+=======
+INSERT INTO Ticket (event_id, customer_id, purchase_date, status) VALUES
+(4, 5, '2025-03-28', 'Cancelled'),
+(3, 2, '2026-02-28', 'Active'),
+(1, 9, '2026-12-03', 'Active'),
+(5, 10, '2025-12-03', 'Cancelled'),
+(5, 8, '2026-09-22', 'Active');
+>>>>>>> 190a384de40e4bea25c9f467ed42389b657bf158
 /*!40000 ALTER TABLE Ticket ENABLE KEYS */;
 UNLOCK TABLES;
 

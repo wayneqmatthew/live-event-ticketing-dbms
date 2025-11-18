@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
+
+<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #1F1D36;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dbms.controllers.AdminReportController">
+   <children>
+      <ImageView fitHeight="1204.0" fitWidth="1200.0" layoutX="1.0" layoutY="-400.0" opacity="0.25" preserveRatio="true">
+         <image>
+            <Image url="@assets/loginPage-asset2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="1200.0" fitWidth="1200.0" preserveRatio="true">
+         <image>
+            <Image url="@assets/loginPage-asset3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="51.0" fitWidth="60.0" layoutX="31.0" layoutY="28.0" preserveRatio="true">
+         <image>
+            <Image url="@assets/logo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="105.0" layoutY="41.0" text="LIVE TICKETING DBMS" textFill="WHITE">
+         <font>
+            <Font name="Inter 18pt Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="631.0" layoutY="97.0" mnemonicParsing="false" onAction="#onTicketSalesReportClick" prefHeight="98.0" prefWidth="400.0" style="-fx-background-radius: 50; -fx-background-color: #4f378a;" text="TICKET SALES REPORT" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <effect>
+            <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.7480915784835815" />
+               </color>
+            </DropShadow>
+         </effect>
+         <font>
+            <Font name="Inter 18pt Black" size="25.0" />
+         </font>
+      </Button>
+      <TextFlow layoutX="105.0" layoutY="217.0" prefHeight="360.0" prefWidth="408.0">
+         <children>
+            <Label prefHeight="36.0" prefWidth="142.0" text="Good " textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Inter 18pt Black" size="50.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="62.0" text="to " textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Inter 18pt Black" size="50.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="369.0" prefHeight="35.0" prefWidth="99.0" text="see " textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Inter 18pt Black" size="50.0" />
+               </font>
+            </Label>
+            <Label layoutX="193.0" layoutY="308.0" prefHeight="37.0" prefWidth="105.0" text="you " textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Inter 18pt Black" size="50.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="369.0" prefHeight="20.0" prefWidth="166.0" text="again, " textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Inter 18pt Black" size="50.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="308.0" prefHeight="29.0" prefWidth="183.0" text="Admin!" textFill="#b1a1ed" wrapText="true">
+               <font>
+                  <Font name="Inter 18pt Black" size="50.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="391.0" prefHeight="244.0" prefWidth="326.0" text="Time to keep everything running smoothly." textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Inter 18pt Black" size="50.0" />
+               </font>
+            </Label>
+         </children>
+      </TextFlow>
+      <Button layoutX="631.0" layoutY="478.0" mnemonicParsing="false" onAction="#onArtistPaymentReportClick" prefHeight="98.0" prefWidth="400.0" style="-fx-background-radius: 50; -fx-background-color: #4f378a;" text="ARTIST PAYMENT REPORT" textFill="WHITE">
+         <effect>
+            <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.7480915784835815" />
+               </color>
+            </DropShadow>
+         </effect>
+         <font>
+            <Font name="Inter 18pt Black" size="25.0" />
+         </font>
+      </Button>
+      <Button layoutX="631.0" layoutY="222.0" mnemonicParsing="false" onAction="#onCustomerPurchaseReportClick" prefHeight="98.0" prefWidth="400.0" style="-fx-background-radius: 50; -fx-background-color: #4f378a;" text="CUSTOMER PURCHASE REPORT" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <effect>
+            <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.7480915784835815" />
+               </color>
+            </DropShadow>
+         </effect>
+         <font>
+            <Font name="Inter 18pt Black" size="25.0" />
+         </font>
+      </Button>
+      <Button layoutX="631.0" layoutY="350.0" mnemonicParsing="false" onAction="#onTicketRefundReportClick" prefHeight="98.0" prefWidth="400.0" style="-fx-background-radius: 50; -fx-background-color: #4f378a;" text="TICKET REFUND &amp; CANCELLATION REPORT" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <effect>
+            <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.7480915784835815" />
+               </color>
+            </DropShadow>
+         </effect>
+         <font>
+            <Font name="Inter 18pt Black" size="25.0" />
+         </font>
+      </Button>
+      <Button layoutX="631.0" layoutY="606.0" mnemonicParsing="false" onAction="#onReturnToAdminMenuClick" prefHeight="98.0" prefWidth="400.0" style="-fx-background-radius: 50; -fx-background-color: #4f378a;" text="RETURN TO ADMIN MENU" textFill="WHITE">
+         <effect>
+            <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.7480915784835815" />
+               </color>
+            </DropShadow>
+         </effect>
+         <font>
+            <Font name="Inter 18pt Black" size="25.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

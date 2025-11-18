@@ -44,7 +44,7 @@ public class OrganizerController {
 
         catch(Exception e){
             e.printStackTrace();
-            showAlert(AlertType.ERROR, "Error", "Failed to load log out: " + e.getMessage());
+            showAlert(AlertType.ERROR, "Error", "Failed to log out: " + e.getMessage());
         }
     }
 
