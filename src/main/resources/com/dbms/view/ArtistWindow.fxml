@@ -32,7 +32,7 @@
             <Font name="Inter 18pt Bold" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="631.0" layoutY="225.0" mnemonicParsing="false" prefHeight="98.0" prefWidth="400.0" style="-fx-background-radius: 50; -fx-background-color: #4f378a;" text="VIEW EVENT" textFill="WHITE">
+      <Button layoutX="631.0" layoutY="288.0" mnemonicParsing="false" prefHeight="98.0" prefWidth="400.0" style="-fx-background-radius: 50; -fx-background-color: #4f378a;" text="VIEW EVENTS" textFill="WHITE">
          <effect>
             <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
                <color>
@@ -83,19 +83,7 @@
             </Label>
          </children>
       </TextFlow>
-      <Button layoutX="631.0" layoutY="350.0" mnemonicParsing="false" prefHeight="98.0" prefWidth="400.0" style="-fx-background-radius: 50; -fx-background-color: #4f378a;" text="PAYOUT" textFill="WHITE">
-         <effect>
-            <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
-               <color>
-                  <Color opacity="0.7480915784835815" />
-               </color>
-            </DropShadow>
-         </effect>
-         <font>
-            <Font name="Inter 18pt Black" size="25.0" />
-         </font>
-      </Button>
-      <Button layoutX="631.0" layoutY="478.0" mnemonicParsing="false" onAction="#onLogOutClick" prefHeight="98.0" prefWidth="400.0" style="-fx-background-radius: 50; -fx-background-color: #4f378a;" text="LOG OUT" textFill="WHITE">
+      <Button layoutX="631.0" layoutY="416.0" mnemonicParsing="false" onAction="#onLogOutClick" prefHeight="98.0" prefWidth="400.0" style="-fx-background-radius: 50; -fx-background-color: #4f378a;" text="LOG OUT" textFill="WHITE">
          <effect>
             <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
                <color>

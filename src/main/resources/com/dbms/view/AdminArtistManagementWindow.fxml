@@ -68,12 +68,12 @@
       </Label>
       <TableView fx:id="artistTable" layoutX="75.0" layoutY="125.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1050.0" style="-fx-background-color: #36344F; -fx-text-fill: #FFFFFF;">
         <columns>
-          <TableColumn fx:id="artistIdColumn" prefWidth="164.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="ARTIST ID" />
-          <TableColumn fx:id="nameColumn" prefWidth="202.40000915527344" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="NAME" />
-            <TableColumn fx:id="emailColumn" prefWidth="175.20004272460938" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="EMAIL" />
-            <TableColumn fx:id="genreColumn" prefWidth="141.5999755859375" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="GENRE" />
-            <TableColumn fx:id="companyColumn" prefWidth="237.59991455078125" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="MANAGEMENT COMPANY" />
-            <TableColumn fx:id="statusColumn" prefWidth="128.00006103515625" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="STATUS" />
+          <TableColumn fx:id="artistIdColumn" prefWidth="175.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="ARTIST ID" />
+          <TableColumn fx:id="nameColumn" prefWidth="175.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="NAME" />
+            <TableColumn fx:id="emailColumn" prefWidth="175.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="EMAIL" />
+            <TableColumn fx:id="genreColumn" prefWidth="175.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="GENRE" />
+            <TableColumn fx:id="companyColumn" prefWidth="175.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="MANAGEMENT COMPANY" />
+            <TableColumn fx:id="statusColumn" prefWidth="175.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="STATUS" />
         </columns>
          <effect>
             <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
