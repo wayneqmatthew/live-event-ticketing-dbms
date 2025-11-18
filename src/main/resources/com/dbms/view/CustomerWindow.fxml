@@ -32,7 +32,7 @@
             <Font name="Inter 18pt Bold" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="631.0" layoutY="161.0" mnemonicParsing="false" prefHeight="98.0" prefWidth="400.0" style="-fx-background-radius: 50; -fx-background-color: #4f378a;" text="TICKET PURCHASE" textFill="WHITE">
+      <Button layoutX="631.0" layoutY="161.0" mnemonicParsing="false" onAction="#onTicketPurchaseClick" prefHeight="98.0" prefWidth="400.0" style="-fx-background-radius: 50; -fx-background-color: #4f378a;" text="TICKET PURCHASE" textFill="WHITE">
          <effect>
             <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
                <color>
@@ -95,7 +95,7 @@
             <Font name="Inter 18pt Black" size="25.0" />
          </font>
       </Button>
-      <Button layoutX="631.0" layoutY="286.0" mnemonicParsing="false" prefHeight="98.0" prefWidth="400.0" style="-fx-background-radius: 50; -fx-background-color: #4f378a;" text="VIEW EVENT" textFill="WHITE">
+      <Button layoutX="631.0" layoutY="286.0" mnemonicParsing="false" onAction="#onViewEventClick" prefHeight="98.0" prefWidth="400.0" style="-fx-background-radius: 50; -fx-background-color: #4f378a;" text="VIEW EVENT" textFill="WHITE">
          <effect>
             <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
                <color>
@@ -107,7 +107,7 @@
             <Font name="Inter 18pt Black" size="25.0" />
          </font>
       </Button>
-      <Button layoutX="631.0" layoutY="414.0" mnemonicParsing="false" prefHeight="98.0" prefWidth="400.0" style="-fx-background-radius: 50; -fx-background-color: #4f378a;" text="VIEW TICKET" textFill="WHITE">
+      <Button layoutX="631.0" layoutY="414.0" mnemonicParsing="false" onAction="#onViewTicketClick" prefHeight="98.0" prefWidth="400.0" style="-fx-background-radius: 50; -fx-background-color: #4f378a;" text="VIEW TICKET" textFill="WHITE">
          <effect>
             <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
                <color>

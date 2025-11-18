@@ -1,5 +1,6 @@
 package com.dbms.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +15,23 @@ public class CustomerController {
     private Pane rootPane;
 
     @FXML
+    private void onTicketPurchaseClick(ActionEvent event){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/CustomerPurchaseWindow.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage primaryStage = (Stage) rootPane.getScene().getWindow();
+
+            primaryStage.setScene(scene);
+        }
+
+        catch(Exception e){
+            e.printStackTrace();
+            showAlert(AlertType.ERROR, "Error", "Failed to load ticket purchase: " + e.getMessage());
+        }
+    }
+
+    @FXML
     private void onViewEventClick(){
 
     }
@@ -21,10 +39,10 @@ public class CustomerController {
     @FXML
     private void onViewTicketClick(){
         
-    }
+    }   
 
     @FXML
-    private void onLogOutClick(){
+    private void onLogOutClick(ActionEvent event){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/LoginWindow.fxml"));
             Parent root = loader.load();
