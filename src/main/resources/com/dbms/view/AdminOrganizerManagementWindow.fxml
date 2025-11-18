@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #1F1D36;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dbms.controllers.AdminOrganizerManagementController">
+   <children>
+      <ImageView fitHeight="1204.0" fitWidth="1200.0" layoutY="-400.0" opacity="0.25" preserveRatio="true">
+         <image>
+            <Image url="@assets/loginPage-asset2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="1200.0" fitWidth="1200.0" preserveRatio="true">
+         <image>
+            <Image url="@assets/loginPage-asset3.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="263.0" layoutY="680.0" mnemonicParsing="false" onAction="#onUpdateClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="UPDATE" textFill="WHITE">
+         <font>
+            <Font name="Inter 18pt Black" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.75" />
+               </color>
+            </DropShadow>
+         </effect></Button>
+      <Button layoutX="663.0" layoutY="578.0" mnemonicParsing="false" onAction="#onDeleteClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="DELETE" textFill="WHITE">
+         <font>
+            <Font name="Inter 18pt Black" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.75" />
+               </color>
+            </DropShadow>
+         </effect></Button>
+      <Button layoutX="663.0" layoutY="680.0" mnemonicParsing="false" onAction="#onReturnToMainMenuClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="RETURN TO MAIN MENU" textFill="WHITE">
+         <font>
+            <Font name="Inter 18pt Black" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.75" />
+               </color>
+            </DropShadow>
+         </effect></Button>
+      <ImageView fitHeight="51.0" fitWidth="60.0" layoutX="31.0" layoutY="28.0" preserveRatio="true">
+         <image>
+            <Image url="@assets/logo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="105.0" layoutY="41.0" text="LIVE TICKETING DBMS" textFill="WHITE">
+         <font>
+            <Font name="Inter 18pt Bold" size="20.0" />
+         </font>
+      </Label>
+      <TableView fx:id="organizerTable" layoutX="75.0" layoutY="125.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1050.0" style="-fx-background-color: #36344F; -fx-text-fill: #FFFFFF;">
+        <columns>
+          <TableColumn fx:id="organizerIdColumn" prefWidth="150.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="ORGANIZER ID" />
+          <TableColumn fx:id="nameColumn" prefWidth="150.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="NAME" />
+            <TableColumn fx:id="emailColumn" prefWidth="150.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="EMAIL" />
+            <TableColumn fx:id="cityColumn" prefWidth="150.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="CITY" />
+            <TableColumn fx:id="countryColumn" prefWidth="150.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="COUNTRY" />
+            <TableColumn fx:id="regionColumn" prefWidth="150.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="REGION" />
+            <TableColumn fx:id="statusColumn" prefWidth="150.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="STATUS" />
+        </columns>
+         <effect>
+            <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.7480915784835815" />
+               </color>
+            </DropShadow>
+         </effect>
+      </TableView>
+      <Button layoutX="263.0" layoutY="578.0" mnemonicParsing="false" onAction="#onAddClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="ADD" textFill="WHITE">
+         <font>
+            <Font name="Inter 18pt Black" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.75" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+   </children>
+</Pane>

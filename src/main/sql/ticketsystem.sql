@@ -75,9 +75,9 @@ CREATE TABLE Organizer (
     organizer_id INT PRIMARY KEY AUTO_INCREMENT,		-- Unique ID for each organizer
     name VARCHAR (100),                 -- name of organizer
     email VARCHAR (255),                -- email of organizer
-    region VARCHAR(50),					-- Region where it is located
+	city VARCHAR(50),					-- City where it is located
     country VARCHAR(50),				-- Country where it is located
-    city VARCHAR(50),					-- City where it is located
+    region VARCHAR(50),					-- Region where it is located
     status VARCHAR(15)                  -- status
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
