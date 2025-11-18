@@ -10,7 +10,10 @@ import java.sql.Statement;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import javafx.scene.Node;
+
 import com.dbms.models.Artist;
+import com.dbms.models.Customer;
 import com.dbms.utils.Database;
 
 import javafx.collections.FXCollections;
@@ -199,6 +202,32 @@ public class AdminArtistManagementController implements Initializable {
         } catch (IOException e){
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Error", "Could not load the add artist management: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void onViewClick(ActionEvent event){
+        Artist selectedArtist = artistTable.getSelectionModel().getSelectedItem();
+
+        if (selectedArtist == null){
+            showAlert(Alert.AlertType.WARNING, "No Selection", "Please select a artist to view.");
+            return;
+        }
+
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminArtistManagementViewWindow.fxml"));
+            Parent root = loader.load();
+
+            AdminArtistManagementViewController formUpdateController = loader.getController();
+
+            formUpdateController.initData(selectedArtist);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        }
+        catch(IOException e){
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Could not load the view artist: " + e.getMessage());
         }
     }
 
