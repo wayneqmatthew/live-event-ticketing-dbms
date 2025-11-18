@@ -23,6 +23,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -111,7 +114,29 @@ public class OrganizerViewEventController implements Initializable{
 
     @FXML
     private void onCreateClick(ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/OrganizerCreateEventWindow.fxml"));
+            Parent root = loader.load();
+
+            OrganizerCreateEventController organizerCreateEventController = loader.getController();
+            organizerCreateEventController.setOrganizerId(organizerId);
+            
+            Stage stage = new Stage();
+            Image logo = new Image("com/dbms/view/assets/logo.png");
+
+            stage.getIcons().add(logo);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.setOnHidden(e -> loadEvents());
+            stage.showAndWait();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Error", "Failed to open create window: " + e.getMessage());
+            }
     }
+
 
     @FXML
     private void onReturnToOrganizerMenuClick(ActionEvent event){
