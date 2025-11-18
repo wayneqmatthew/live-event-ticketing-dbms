@@ -114,8 +114,8 @@ CREATE TABLE Event (
     time TIME,						-- Time of the event
     date DATE,						-- Date of the event
     capacity INT,					-- Number of tickets the event can sell
+    ticket_price FLOAT,             -- Ticket price for each evemnt
     status VARCHAR(20),				-- The status of the ticket (i.e "Upcoming")
-    category VARCHAR(50),			-- Category of the event
     FOREIGN KEY (venue_id) REFERENCES Venue(venue_id),
     FOREIGN KEY (artist_id) REFERENCES Artist(artist_id),
     FOREIGN KEY (organizer_id) REFERENCES Organizer(organizer_id)
@@ -147,7 +147,6 @@ CREATE TABLE Ticket (
     ticket_id INT PRIMARY KEY AUTO_INCREMENT,			-- Unique ID for each ticket
     event_id INT,						-- Foreign key connecting Ticket to Event
     customer_id INT,					-- Foreign key connecting Ticket to Customer
-    seat_number VARCHAR(10),			-- Seat number on the ticket
     purchase_date DATE,					-- Date when the ticket was purchased
     price DECIMAL(10,2),				-- Price of the ticket
     status VARCHAR(20),					-- Status of the ticket (i.e "Active", "Cancelled")

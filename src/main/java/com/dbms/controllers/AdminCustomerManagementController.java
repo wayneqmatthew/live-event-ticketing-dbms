@@ -7,10 +7,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import com.dbms.models.Venue;
+import com.dbms.models.Customer;
 import com.dbms.utils.Database;
 
 import javafx.collections.FXCollections;
@@ -30,67 +31,67 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class AdminVenueManagementController implements Initializable {
+public class AdminCustomerManagementController implements Initializable{
     @FXML
-    private TableView<Venue> venueTable;
+    private TableView<Customer> customerTable;
 
     @FXML
-    private TableColumn<Venue, Integer> venueIdColumn;
+    private TableColumn<Customer, Integer> customerIdColumn;
 
     @FXML
-    private TableColumn<Venue, String> nameColumn;
+    private TableColumn<Customer, String> lastNameColumn;
 
     @FXML
-    private TableColumn<Venue, Integer> capacityColumn;
+    private TableColumn<Customer, String> firstNameColumn;
 
     @FXML
-    private TableColumn<Venue, String> cityColumn;
+    private TableColumn<Customer, String> emailColumn;
 
     @FXML
-    private TableColumn<Venue, String> countryColumn;
+    private TableColumn<Customer, String> phoneNumberColumn;
 
     @FXML
-    private TableColumn<Venue, String> regionColumn;
+    private TableColumn<Customer, LocalDate> registrationDateColumn;
 
     @FXML
-    private TableColumn<Venue, String> statusColumn;
+    private TableColumn<Customer, String> statusColumn;
 
-    private ObservableList<Venue> venueList = FXCollections.observableArrayList();
+    private ObservableList<Customer> customerList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-        venueIdColumn.setCellValueFactory(new PropertyValueFactory<>("venue_id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        capacityColumn.setCellValueFactory(new PropertyValueFactory<>("capacity"));
-        cityColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
-        countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
-        regionColumn.setCellValueFactory(new PropertyValueFactory<>("region"));
+        customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customer_id"));
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("last_name"));
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("first_name"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phone_number"));
+        registrationDateColumn.setCellValueFactory(new PropertyValueFactory<>("registration_date"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        loadVenues();
+        loadCustomers();
     }
 
-    private void loadVenues(){
-        venueList.clear();
-        String sql = "SELECT venue_id, name, capacity, city, country, region, status FROM VENUE";
+    private void loadCustomers(){
+        customerList.clear();
+        String sql = "SELECT customer_id, last_name, first_name, email, phone_number, registration_date, status FROM CUSTOMER";
 
         try (Connection conn = Database.connect();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql)){
 
             while (rs.next()){
-                venueList.add(new Venue(
-                    rs.getInt("venue_id"),
-                    rs.getString("name"),
-                    rs.getInt("capacity"),
-                    rs.getString("city"),
-                    rs.getString("country"),
-                    rs.getString("region"),
+                customerList.add(new Customer(
+                    rs.getInt("customer_id"),
+                    rs.getString("last_name"),
+                    rs.getString("first_name"),
+                    rs.getString("email"),
+                    rs.getString("phone_number"),
+                    rs.getDate("registration_date").toLocalDate(),
                     rs.getString("status")
                 ));
             }
 
-            venueTable.setItems(venueList);
+            customerTable.setItems(customerList);
 
         } catch (SQLException e){
             e.printStackTrace();
@@ -100,39 +101,39 @@ public class AdminVenueManagementController implements Initializable {
 
     @FXML
     private void onDeleteClick(ActionEvent event){
-        Venue selectedVenue = venueTable.getSelectionModel().getSelectedItem();
+        Customer selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
 
-        if (selectedVenue == null){
+        if (selectedCustomer == null){
             showAlert(Alert.AlertType.WARNING, "No Selection", "Please select a venue to Inactive");
             return;
         }
 
-        if (selectedVenue.getStatus().equalsIgnoreCase("Inactive")){
+        if (selectedCustomer.getStatus().equalsIgnoreCase("Inactive")){
             showAlert(Alert.AlertType.INFORMATION, "Already Inactive", "This venue is already 'Inactive'.");
             return;
         }
 
         Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmAlert.setTitle("Confirm Deletion");
-        confirmAlert.setHeaderText("Are you sure you want to delete this venue?");
-        confirmAlert.setContentText(selectedVenue.getName());
+        confirmAlert.setHeaderText("Are you sure you want to delete this customer?");
+        confirmAlert.setContentText(selectedCustomer.getFirst_name() + selectedCustomer.getLast_name());
 
         Optional<ButtonType> result = confirmAlert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK){
-            String sql = "UPDATE Venue SET status = 'Inactive' WHERE venue_id = ?";
+            String sql = "UPDATE Customer SET status = 'Inactive' WHERE customer_id = ?";
 
             try (Connection conn = Database.connect();
                  PreparedStatement pstmt = conn.prepareStatement(sql)){
 
-                    pstmt.setInt(1, selectedVenue.getVenue_id());
+                    pstmt.setInt(1, selectedCustomer.getCustomer_id());
                     int rowsAffected = pstmt.executeUpdate();
 
                     if (rowsAffected > 0){
-                        showAlert(Alert.AlertType.INFORMATION, "Success", "Venue deleted.");
-                        loadVenues();
+                        showAlert(Alert.AlertType.INFORMATION, "Success", "Customer deleted.");
+                        loadCustomers();
                     } else {
-                        showAlert(Alert.AlertType.ERROR, "Error", "Failed to delete venue.");
+                        showAlert(Alert.AlertType.ERROR, "Error", "Failed to delete customer.");
                     }
                  } catch (SQLException e) {
                     e.printStackTrace();
@@ -143,20 +144,20 @@ public class AdminVenueManagementController implements Initializable {
 
     @FXML
     private void onUpdateClick(ActionEvent event){
-        Venue selectedVenue = venueTable.getSelectionModel().getSelectedItem();
+        Customer selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
 
-        if (selectedVenue == null){
-            showAlert(Alert.AlertType.WARNING, "No Selection", "Please select a venue to update.");
+        if (selectedCustomer == null){
+            showAlert(Alert.AlertType.WARNING, "No Selection", "Please select a customer to update.");
             return;
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminVenueManagementUpdateWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminCustomerManagementUpdateWindow.fxml"));
             Parent root = loader.load();
 
-            AdminVenueManagementUpdateController formUpdateController = loader.getController();
+            AdminCustomerManagementUpdateController formUpdateController = loader.getController();
 
-            formUpdateController.initData(selectedVenue);
+            formUpdateController.initData(selectedCustomer);
 
             Stage stage = new Stage();
             Image logo = new Image("com/dbms/view/assets/logo.png");
@@ -165,7 +166,7 @@ public class AdminVenueManagementController implements Initializable {
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
-            stage.setOnHidden(e -> loadVenues());
+            stage.setOnHidden(e -> loadCustomers());
             stage.showAndWait();
 
         } catch (IOException e){
@@ -178,7 +179,7 @@ public class AdminVenueManagementController implements Initializable {
     private void onReturnToMainMenuClick(ActionEvent event){
         try{
             Parent root = FXMLLoader.load(getClass().getResource("/com/dbms/view/AdminWindow.fxml"));
-            Stage stage = (Stage) venueTable.getScene().getWindow();
+            Stage stage = (Stage) customerTable.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException e){
             e.printStackTrace();
@@ -189,7 +190,7 @@ public class AdminVenueManagementController implements Initializable {
     @FXML
     private void onAddClick(ActionEvent event){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminVenueManagementAddWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminCustomerManagementAddWindow.fxml"));
             Parent root = loader.load();
 
             Stage stage = new Stage();
@@ -199,12 +200,12 @@ public class AdminVenueManagementController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
             stage.setResizable(false);
-            stage.setOnHidden(e -> loadVenues());
+            stage.setOnHidden(e -> loadCustomers());
             stage.showAndWait();
 
         } catch (IOException e){
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Error", "Could not load the add venue management: " + e.getMessage());
+            showAlert(Alert.AlertType.ERROR, "Error", "Could not load the add customer management: " + e.getMessage());
         }
     }
 
