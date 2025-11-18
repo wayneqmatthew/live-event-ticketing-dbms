@@ -106,12 +106,12 @@ UNLOCK TABLES;
 -- Dumping data for table Ticket
 -- ==============================
 /*!40000 ALTER TABLE Ticket DISABLE KEYS */;
-INSERT INTO Ticket (event_id, customer_id, seat_number, purchase_date, price, status) VALUES
-(4, 5, 'J39', '2025-03-28', 4700.00, 'Cancelled'),
-(3, 2, 'B20', '2026-02-28', 15699.00, 'Active'),
-(1, 9, 'H27', '2026-12-03', 5700.00, 'Active'),
-(5, 10, 'A13', '2025-12-03', 7400.00, 'Cancelled'),
-(5, 8, 'E30', '2026-09-22', 15100.00, 'Active');
+INSERT INTO Ticket (event_id, customer_id, purchase_date, price, status) VALUES
+(4, 5, '2025-03-28', 4700.00, 'Cancelled'),
+(3, 2, '2026-02-28', 15699.00, 'Active'),
+(1, 9, '2026-12-03', 5700.00, 'Active'),
+(5, 10, '2025-12-03', 7400.00, 'Cancelled'),
+(5, 8, '2026-09-22', 15100.00, 'Active');
 /*!40000 ALTER TABLE Ticket ENABLE KEYS */;
 UNLOCK TABLES;
 

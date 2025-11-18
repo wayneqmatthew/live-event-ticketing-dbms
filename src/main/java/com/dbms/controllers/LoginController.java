@@ -36,12 +36,15 @@ public class LoginController implements Initializable{
 
     private String identifier;
     private String password;
+    
 
     private final String adminUsername = "admin";
     private final String adminPassword = "admin";
 
     private final String[] userTypeCollection = {"CUSTOMER", "ARTIST", "ORGANIZER", "ADMIN"};
     private String userType;
+
+    private int organizerId;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
@@ -52,6 +55,11 @@ public class LoginController implements Initializable{
     public void userTypeChoice(ActionEvent event){
         userType = userTypeChoiceBox.getValue();
     }
+
+    public void setOrganizerId(int organizerId) {
+        this.organizerId = organizerId;
+    }
+
 
     @FXML
     private void onSubmitClick(ActionEvent event){
@@ -77,15 +85,17 @@ public class LoginController implements Initializable{
                     break;
                 
                 case "ORGANIZER":
-                    if(authenticateOrganizer(identifier) && password.equals(adminPassword)){
+                    if (authenticateOrganizer(identifier) && password.equals(adminPassword)) {
                         FXMLLoader loaderOrganizer = new FXMLLoader(getClass().getResource("/com/dbms/view/OrganizerWindow.fxml"));
                         Parent rootOrganizer = loaderOrganizer.load();
+
+                        OrganizerController controller = loaderOrganizer.getController();
+                        controller.setOrganizerId(Integer.parseInt(identifier));
+
                         Scene sceneOrganizer = new Scene(rootOrganizer);
                         Stage primaryStageOrganizer = (Stage) rootPane.getScene().getWindow();
-
                         primaryStageOrganizer.setScene(sceneOrganizer);
-                    }
-                    else{
+                    } else {
                         showAlert(AlertType.ERROR, "Error", "Failed to authenticate.");
                         return;
                     }
