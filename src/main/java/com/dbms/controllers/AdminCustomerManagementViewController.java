@@ -56,13 +56,13 @@ public class AdminCustomerManagementViewController implements Initializable{
         ticketIdColumn.setCellValueFactory(new PropertyValueFactory<>("ticket_id"));
         eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("event_name"));
         purchaseDateColumn.setCellValueFactory(new PropertyValueFactory<>("purchase_date"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("ticket_price"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
     }
 
     private void loadCustomerTickets(){
         customerTicketList.clear();
-        String sql = "SELECT t.ticket_id, e.event_name, t.purchase_date, t.price, t.status FROM Ticket t JOIN Event e ON e.event_id = t.event_id WHERE t.customer_id = ?";
+        String sql = "SELECT t.ticket_id, e.event_name, t.purchase_date, e.ticket_price, t.status FROM Ticket t JOIN Event e ON e.event_id = t.event_id WHERE t.customer_id = ?";
 
         try (Connection conn = Database.connect();PreparedStatement preparedStatement = conn.prepareStatement(sql)){
 
@@ -75,7 +75,7 @@ public class AdminCustomerManagementViewController implements Initializable{
                     resultSet.getInt("ticket_id"),
                     resultSet.getString("event_name"),
                     resultSet.getDate("purchase_date").toLocalDate(),
-                    resultSet.getFloat("price"),
+                    resultSet.getFloat("ticket_price"),
                     resultSet.getString("status")
                 ));
             }

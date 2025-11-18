@@ -41,7 +41,7 @@ public class CancellationController implements Initializable {
         ticketIdColumn.setCellValueFactory(new PropertyValueFactory<>("ticket_id"));
         eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("event_name"));
         purchaseDateColumn.setCellValueFactory(new PropertyValueFactory<>("purchase_date"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("ticket_price"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         loadMyTickets();
@@ -54,7 +54,7 @@ public class CancellationController implements Initializable {
         String sql = "SELECT t.ticket_id AS ticket_id, " + // Alias 1
                     "e.event_name AS event_name, " +     // Alias 2
                     "t.purchase_date AS purchase_date, " +
-                    "t.price AS price, " +
+                    "e.ticket_price AS price, " +
                     "t.status AS status " + 
                     "FROM Ticket t " +
                     "JOIN Event e ON t.event_id = e.event_id " +
@@ -74,7 +74,7 @@ public class CancellationController implements Initializable {
                     rs.getInt("ticket_id"),
                     rs.getString("event_name"),
                     rs.getDate("purchase_date").toLocalDate(),
-                    rs.getFloat("price"),
+                    rs.getFloat("ticket_price"),
                     rs.getString("status") 
                 ));
             }
@@ -99,7 +99,7 @@ public class CancellationController implements Initializable {
         confirmAlert.setTitle("Confirm Cancellation");
         confirmAlert.setHeaderText("Cancel Ticket #" + selectedTicket.getTicket_id() + "?");
         confirmAlert.setContentText("Event: " + selectedTicket.getEvent_name() + 
-                                    "\nRefund Amount: " + selectedTicket.getPrice());
+                                    "\nRefund Amount: " + selectedTicket.getTicket_price());
 
         Optional<ButtonType> result = confirmAlert.showAndWait();
 
@@ -124,7 +124,7 @@ public class CancellationController implements Initializable {
 
             try (PreparedStatement pstmt2 = conn.prepareStatement(insertCancelSql)) {
                 pstmt2.setInt(1, ticket.getTicket_id());
-                pstmt2.setDouble(2, ticket.getPrice());
+                pstmt2.setDouble(2, ticket.getTicket_price());
                 pstmt2.setDate(3, Date.valueOf(LocalDate.now()));
                 pstmt2.executeUpdate();
             }

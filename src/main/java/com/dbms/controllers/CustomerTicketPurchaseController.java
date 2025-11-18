@@ -115,8 +115,8 @@ public class CustomerTicketPurchaseController implements Initializable{
     private void onPurchaseClick(ActionEvent event){
         CustomerEvent selectedEvent = availableEventsTable.getSelectionModel().getSelectedItem();
 
-        String sql = "INSERT INTO Ticket (event_id, customer_id, purchase_date, price, status) " +
-            "VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Ticket (event_id, customer_id, purchase_date, status) " +
+            "VALUES(?, ?, ?, ?)";
 
         if (selectedEvent == null){
             showAlert(Alert.AlertType.WARNING, "No Selection", "Please select an event to purchase.");
@@ -129,8 +129,7 @@ public class CustomerTicketPurchaseController implements Initializable{
             preparedStatement.setInt(1, selectedEvent.getEvent_id());
             preparedStatement.setInt(2, customerIdNumber);
             preparedStatement.setDate(3, Date.valueOf(LocalDate.now()));
-            preparedStatement.setFloat(4, selectedEvent.getTicket_price());
-            preparedStatement.setString(5, "Active");
+            preparedStatement.setString(4, "Active");
 
             int rowsAffected = preparedStatement.executeUpdate();
             Platform.runLater(() ->{
