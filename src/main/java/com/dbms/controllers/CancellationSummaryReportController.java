@@ -42,7 +42,7 @@ public class CancellationSummaryReportController implements Initializable {
         // 1. Setup Columns (Bind to Model)
         eventIdColumn.setCellValueFactory(new PropertyValueFactory<>("eventId"));
         eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
-        ticketsRefundedColumn.setCellValueFactory(new PropertyValueFactory<>("totalRefunded"));
+        ticketsRefundedColumn.setCellValueFactory(new PropertyValueFactory<>("ticketsRefunded"));
     }
 
     @FXML
