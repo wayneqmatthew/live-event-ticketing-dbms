@@ -78,8 +78,23 @@ public class OrganizerViewEventController implements Initializable{
         capacityColumn.setCellValueFactory(new PropertyValueFactory<>("capacity"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("ticket_price"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-    
+
         loadEvents();
+    }
+
+    private void updateEventStatusToDone(int eventId) {
+        String sql = "UPDATE Event SET status = 'Done' WHERE event_id = ?";
+
+        try (Connection conn = Database.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, eventId);
+            pstmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to update event status: " + e.getMessage());
+        }
     }
 
     private void loadEvents(){
@@ -93,7 +108,7 @@ public class OrganizerViewEventController implements Initializable{
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()){
-                eventList.add(new Event(
+                Event event = new Event(
                     resultSet.getInt("event_id"),
                     resultSet.getInt("venue_id"),
                     resultSet.getInt("artist_id"),
@@ -104,7 +119,15 @@ public class OrganizerViewEventController implements Initializable{
                     resultSet.getInt("capacity"),
                     resultSet.getFloat("ticket_price"),
                     resultSet.getString("status")
-                ));
+                );
+
+                if ((event.getDate().isBefore(LocalDate.now()) || (event.getDate().equals(LocalDate.now()) && event.getTime().isBefore(LocalTime.now()))) && !event.getStatus().equalsIgnoreCase("Done")) {
+        
+                    updateEventStatusToDone(event.getEvent_id());
+                    event.setStatus("Done"); // update local object too
+                }
+            
+                eventList.add(event);
             }
 
             eventTable.setItems(eventList);

@@ -60,5 +60,10 @@ public class Event {
     public int getCapacity(){return capacity.get();}
     public float getTicket_price(){return ticket_price.get();}
     public String getStatus(){return status.get();}
+
+    public void setStatus(String status) {
+        this.status.set(status);
+    }
+
 }
 
