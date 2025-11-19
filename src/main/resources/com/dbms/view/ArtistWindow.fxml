@@ -32,7 +32,7 @@
             <Font name="Inter 18pt Bold" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="631.0" layoutY="288.0" mnemonicParsing="false" prefHeight="98.0" prefWidth="400.0" style="-fx-background-radius: 50; -fx-background-color: #4f378a;" text="VIEW EVENTS" textFill="WHITE">
+      <Button layoutX="631.0" layoutY="288.0" mnemonicParsing="false" onAction="#onViewEventsClick" prefHeight="98.0" prefWidth="400.0" style="-fx-background-radius: 50; -fx-background-color: #4f378a;" text="VIEW EVENTS" textFill="WHITE">
          <effect>
             <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
                <color>
