@@ -66,6 +66,22 @@ public class OrganizerCreateEventController {
         return false;
     }
 
+    private int getVenueCapacity(int venue_id) {
+        String sql = "SELECT capacity FROM Venue WHERE venue_id = ?";
+        try (Connection conn = Database.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, venue_id);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("capacity");
+                }
+            }
+        } catch (SQLException e) {
+            Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Database Error", "Error retrieving venue capacity: " + e.getMessage()));
+            e.printStackTrace();
+        }
+        return -1;
+    }
 
     @FXML
     private void onSaveClick(ActionEvent event){
@@ -106,7 +122,20 @@ public class OrganizerCreateEventController {
             time = LocalTime.parse(timeStr);
         } catch (DateTimeParseException e) {
             showAlert(Alert.AlertType.ERROR, "Form Error", "Invalid date or time format. Use yyyy-mm-dd and hh:mm:ss");
-        return;
+            return;
+        }
+
+        LocalDate today = LocalDate.now();
+        LocalTime now = LocalTime.now();
+
+        if (date.isBefore(today)) {
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Event date cannot be in the past.");
+            return;
+        }
+
+        if (date.equals(today) && time.isBefore(now)) {
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Event time must be in the future.");
+            return;
         }
 
         if (!isActive("Venue", "venue_id", venue_id)) {
@@ -119,6 +148,17 @@ public class OrganizerCreateEventController {
             return;
         }
 
+        int venueCapacity = getVenueCapacity(venue_id);
+
+        if (venueCapacity == -1) {
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Venue not found or error retrieving capacity.");
+            return;
+        }
+
+        if (capacity > venueCapacity) {
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Event capacity exceeds venue capacity (" + venueCapacity + ").");
+            return;
+        }
 
         new Thread(() -> {
             if (eventToUpdate != null){
@@ -239,6 +279,6 @@ public class OrganizerCreateEventController {
         timeAddField.setText(event.getTime().toString());
         dateAddField.setText(event.getDate().toString());
         capacityAddField.setText(String.valueOf(event.getCapacity()));
-
+        ticketPriceAddField.setText(String.valueOf(event.getTicket_price()));
     }
 }
