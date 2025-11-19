@@ -48,6 +48,25 @@ public class OrganizerCreateEventController {
 
     private final int organizer_id = 1;
     
+    private boolean isActive(String table, String idColumn, int id) {
+        String sql = "SELECT status FROM " + table + " WHERE " + idColumn + " = ?";
+        try (Connection conn = Database.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    String status = rs.getString("status");
+                    return status != null && status.equalsIgnoreCase("active");
+                }
+            }
+        } catch (SQLException e) {
+            Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Database Error", "Error checking " + table + " status: " + e.getMessage()));
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
     @FXML
     private void onSaveClick(ActionEvent event){
         String venue = venueIDAddField.getText();
@@ -88,6 +107,16 @@ public class OrganizerCreateEventController {
         } catch (DateTimeParseException e) {
             showAlert(Alert.AlertType.ERROR, "Form Error", "Invalid date or time format. Use yyyy-mm-dd and hh:mm:ss");
         return;
+        }
+
+        if (!isActive("Venue", "venue_id", venue_id)) {
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Selected venue is not active.");
+            return;
+        }
+
+        if (!isActive("Artist", "artist_id", artist_id)) {
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Selected artist is not active.");
+            return;
         }
 
 
