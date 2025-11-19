@@ -1,6 +1,5 @@
 package com.dbms.models;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 import javafx.beans.property.DoubleProperty;

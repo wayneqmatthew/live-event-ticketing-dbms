@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-import com.dbms.models.CustomerEvent;
 import com.dbms.models.TicketSales;
 import com.dbms.utils.Database;
 
@@ -73,9 +72,9 @@ public class AdminReportTicketSalesController implements Initializable{
 
         String sql = "SELECT e.event_id, e.event_name, COUNT(t.ticket_id) AS tickets_sold, (COUNT(t.ticket_id) * e.ticket_price) AS total_revenue " + 
             "FROM Event e " + 
-            "LEFT JOIN Ticket t " + 
+            "JOIN Ticket t " + 
             "ON t.event_id = e.event_id " + 
-            "AND YEAR(t.purchase_date) = ? AND MONTH(t.purchase_date) = ? " + 
+            "WHERE YEAR(t.purchase_date) = ? AND MONTH(t.purchase_date) = ? " + 
             "GROUP BY e.event_id, e.event_name, e.ticket_price";
 
 
@@ -94,6 +93,10 @@ public class AdminReportTicketSalesController implements Initializable{
                     resultSet.getInt("tickets_sold"),
                     resultSet.getFloat("total_revenue")
                 ));
+            }
+
+            if (ticketSalesList.isEmpty()) {
+                showAlert(Alert.AlertType.INFORMATION, "No Data", "No ticket sales have been made in this month (" + month + "/" + year + ").");
             }
 
             ticketSalesTable.setItems(ticketSalesList);

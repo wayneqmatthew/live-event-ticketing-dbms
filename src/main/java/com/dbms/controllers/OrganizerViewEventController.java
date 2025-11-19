@@ -22,10 +22,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -140,8 +138,6 @@ public class OrganizerViewEventController implements Initializable{
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/OrganizerCreateEventWindow.fxml"));
             Parent root = loader.load();
-
-            OrganizerCreateEventController organizerCreateEventController = loader.getController();
             
             Stage stage = new Stage();
             Image logo = new Image("com/dbms/view/assets/logo.png");
@@ -165,8 +161,6 @@ public class OrganizerViewEventController implements Initializable{
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/OrganizerWindow.fxml"));
             Parent root = loader.load();
-
-            OrganizerController organizerController = loader.getController();
 
             Stage stage = (Stage) eventTable.getScene().getWindow();
             stage.setScene(new Scene(root));
