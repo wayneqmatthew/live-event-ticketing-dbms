@@ -24,7 +24,7 @@
             <Image url="@assets/loginPage-asset3.png" />
          </image>
       </ImageView>
-      <Button fx:id="backButton" layoutX="803.0" layoutY="659.0" mnemonicParsing="false" onAction="#onReturnToMenuClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="RETURN TO MAIN MENU" textFill="WHITE">
+      <Button fx:id="backButton" layoutX="700.0" layoutY="627.0" mnemonicParsing="false" onAction="#onReturnToMenuClick" prefHeight="60.0" prefWidth="302.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="RETURN TO ORGANIZER MENU" textFill="WHITE">
          <font>
             <Font name="Inter 18pt Black" size="18.0" />
          </font>
@@ -45,11 +45,11 @@
             <Font name="Inter 18pt Bold" size="20.0" />
          </font>
       </Label>
-      <TableView fx:id="eventDTOTable" layoutX="127.0" layoutY="146.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="561.0" style="-fx-background-color: #36344F; -fx-text-fill: #FFFFFF;">
+      <TableView fx:id="eventDTOTable" layoutX="75.0" layoutY="125.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1050.0" style="-fx-background-color: #36344F; -fx-text-fill: #FFFFFF;">
         <columns>
-          <TableColumn fx:id="eventIdColumn" prefWidth="127.20001220703125" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="EVENT ID" />
-          <TableColumn fx:id="eventNameColumn" prefWidth="191.2000274658203" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="EVENT NAME" />
-            <TableColumn fx:id="artistNameColumn" prefWidth="239.2000732421875" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="ARTIST NAME" />
+          <TableColumn fx:id="eventIdColumn" prefWidth="350.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="EVENT ID" />
+          <TableColumn fx:id="eventNameColumn" prefWidth="350.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="EVENT NAME" />
+            <TableColumn fx:id="artistNameColumn" prefWidth="350.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="ARTIST NAME" />
         </columns>
          <effect>
             <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">
@@ -59,7 +59,7 @@
             </DropShadow>
          </effect>
       </TableView>
-      <Button layoutX="302.0" layoutY="652.0" mnemonicParsing="false" onAction="#onPayoutClick" prefHeight="60.0" prefWidth="275.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="PAYOUT" textFill="WHITE">
+      <Button layoutX="199.0" layoutY="627.0" mnemonicParsing="false" onAction="#onPayoutClick" prefHeight="60.0" prefWidth="302.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="PAYOUT" textFill="WHITE">
          <font>
             <Font name="Inter 18pt Black" size="18.0" />
          </font>
@@ -71,6 +71,16 @@
             </DropShadow>
          </effect>
       </Button>
-      <TextField fx:id="commissionField" layoutX="746.0" layoutY="346.0" prefHeight="51.0" prefWidth="203.0" promptText="Commission: Default(15)" />
+      <TextField fx:id="commissionField" layoutX="452.0" layoutY="549.0" prefHeight="51.0" prefWidth="296.0" promptText="COMMISSION: DEFAULT(15)" style="-fx-background-color: #36344F; -fx-text-fill: white; -fx-background-radius: 50;">
+         <effect>
+            <DropShadow height="5.0" offsetY="6.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.75" />
+               </color>
+            </DropShadow>
+         </effect>
+         <font>
+            <Font name="Inter 18pt Bold" size="16.0" />
+         </font></TextField>
    </children>
 </Pane>

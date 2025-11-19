@@ -23,7 +23,7 @@
             <Image url="@assets/loginPage-asset3.png" />
          </image>
       </ImageView>
-      <Button layoutX="411.0" layoutY="627.0" mnemonicParsing="false" onAction="#onReturnOrganizerManagementClick" prefHeight="60.0" prefWidth="379.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="RETURN TO ORGANIZER MANAGEMENT" textFill="WHITE">
+      <Button layoutX="410.0" layoutY="627.0" mnemonicParsing="false" onAction="#onReturnOrganizerManagementClick" prefHeight="60.0" prefWidth="381.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="RETURN TO ORGANIZER MANAGEMENT" textFill="WHITE">
          <font>
             <Font name="Inter 18pt Black" size="18.0" />
          </font>
