@@ -70,34 +70,31 @@ public class CommissionPayoutController implements Initializable{
         loadevents();
     }
 
+
     private void loadevents(){
+        int currentId = LoginController.getIdNumber();
         eventDTOList.clear();
         String sql = "SELECT e.event_id, e.event_name, a.name " + 
                  " FROM event e " +
                  " JOIN artist a ON e.artist_id = a.artist_id " +
                  " LEFT JOIN CommissionPayout cp ON e.event_id = cp.event_id " +
-                 " WHERE cp.payout_id IS NULL " +
+                 " WHERE cp.payout_id IS NULL AND e.organizer_id = ?" +
                  " ORDER BY e.event_name;";
 
         try (Connection conn = Database.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery(
-             )){
-            
-            while (rs.next()){
-                eventDTOList.add(new EventDTO(
-                    rs.getInt("event_id"), 
-                    rs.getString("event_name"),
-                    rs.getString("name")
-                ));
-            }
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+                pstmt.setInt(1, currentId);
 
-            eventDTOTable.setItems(eventDTOList);
-        } catch (SQLException e){
-            showAlert(Alert.AlertType.ERROR, "Database Error", "Error Loading report" + e.getMessage());
-            e.printStackTrace();
-        }
-        
+                try(ResultSet rs = pstmt.executeQuery()){
+                    while(rs.next()){
+                        eventDTOList.add(new EventDTO(rs.getInt("event_id"), rs.getString("event_name"), rs.getString("name")));
+                    }
+                    eventDTOTable.setItems(eventDTOList);
+                }
+            } catch (SQLException e){
+                showAlert(Alert.AlertType.ERROR, "Database Error", "Error Loading report" + e.getMessage());
+                e.printStackTrace();
+            }
     }
 
     @FXML

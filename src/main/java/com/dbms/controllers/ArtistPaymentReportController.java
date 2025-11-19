@@ -64,14 +64,14 @@ public class ArtistPaymentReportController implements Initializable {
     private void loadSummaryReport(int year, int month) {
         reportList.clear();
         String sql = "SELECT a.artist_id, a.name AS artist_name, " +
-                    "SUM(e.ticket_price * (cp.commission_percentage / 100)) AS total_payment " +
-                    "FROM artist a " +
-                    "JOIN event e ON a.artist_id = e.artist_id " +
-                    "JOIN commissionPayout cp ON e.event_id = cp.event_id AND a.artist_id = cp.artist_id " +
-                    "JOIN ticket t ON t.event_id = e.event_id AND t.status = 'Active' " +
-                    "WHERE YEAR(cp.payout_date) = ? AND MONTH(cp.payout_date) = ? " +
-                    "GROUP BY a.artist_id, a.name " +
-                    "ORDER BY total_payment DESC;";
+                    " COALESCE(SUM(e.ticket_price * (cp.commission_percentage / 100)), 0) AS total_payment " +
+                    " FROM artist a " +
+                    " LEFT JOIN commissionPayout cp ON a.artist_id = cp.artist_id" +
+                    " LEFT JOIN event e ON e.event_id = cp.event_id " +
+                    " LEFT JOIN ticket t ON t.event_id = e.event_id AND t.status = 'Active' " +
+                    " WHERE YEAR(cp.payout_date) = ? AND MONTH(cp.payout_date) = ? " +
+                    " GROUP BY a.artist_id, a.name " +
+                    " ORDER BY total_payment DESC;";
 
         try (Connection conn = Database.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
