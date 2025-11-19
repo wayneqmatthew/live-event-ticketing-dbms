@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="320.0" style="-fx-background-color: #1F1D36;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dbms.controllers.OrganizerCreateEventController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="320.0" style="-fx-background-color: #1F1D36;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dbms.controllers.OrganizerCreateEventController">
    <children>
       <Label layoutX="25.0" layoutY="30.0" prefHeight="30.0" prefWidth="270.0" text="Create an event" textFill="WHITE">
          <font>
@@ -25,7 +25,7 @@
                </color>
             </DropShadow>
          </effect></TextField>
-      <Button fx:id="saveAddButton" layoutX="42.0" layoutY="361.0" mnemonicParsing="false" onAction="#onSaveClick" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="SAVE" textFill="WHITE">
+      <Button fx:id="saveAddButton" layoutX="42.0" layoutY="402.0" mnemonicParsing="false" onAction="#onSaveClick" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="SAVE" textFill="WHITE">
          <font>
             <Font name="Inter 18pt Black" size="16.0" />
          </font>
@@ -36,7 +36,7 @@
                </color>
             </DropShadow>
          </effect></Button>
-      <Button layoutX="188.0" layoutY="361.0" mnemonicParsing="false" onAction="#onCancelClick" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="CANCEL" textFill="WHITE">
+      <Button layoutX="188.0" layoutY="402.0" mnemonicParsing="false" onAction="#onCancelClick" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="CANCEL" textFill="WHITE">
          <font>
             <Font name="Inter 18pt Black" size="16.0" />
          </font>
@@ -96,6 +96,18 @@
          </effect>
       </TextField>
       <TextField fx:id="capacityAddField" layoutX="52.0" layoutY="306.0" promptText="Capacity" style="-fx-background-color: #36344F; -fx-text-fill: white; -fx-background-radius: 50;">
+         <font>
+            <Font name="Inter 18pt Bold" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow height="5.0" offsetY="3.0" radius="2.0" width="5.0">
+               <color>
+                  <Color opacity="0.5" />
+               </color>
+            </DropShadow>
+         </effect>
+      </TextField>
+      <TextField fx:id="ticketPriceAddField" layoutX="52.0" layoutY="351.0" promptText="Ticket Price" style="-fx-background-color: #36344F; -fx-text-fill: white; -fx-background-radius: 50;">
          <font>
             <Font name="Inter 18pt Bold" size="16.0" />
          </font>
