@@ -19,8 +19,6 @@ public class OrganizerController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/OrganizerViewEventWindow.fxml"));
             Parent root = loader.load();
 
-            OrganizerViewEventController eventController = loader.getController();
-
             Scene scene = new Scene(root);
             Stage primaryStage = (Stage) rootPane.getScene().getWindow();
 

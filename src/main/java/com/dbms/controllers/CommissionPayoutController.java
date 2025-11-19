@@ -2,27 +2,15 @@ package com.dbms.controllers;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Optional;
 
-import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-
-import com.dbms.controllers.EventDTO;
-import com.dbms.models.CommissionPayout;
 import com.dbms.utils.Database;
-import com.mysql.cj.x.protobuf.MysqlxPrepare.Prepare;
-import com.mysql.cj.xdevapi.SqlStatement;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;

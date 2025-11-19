@@ -54,7 +54,7 @@ public class CancellationController implements Initializable {
         String sql = "SELECT t.ticket_id AS ticket_id, " + 
                     "e.event_name AS event_name, " +   
                     "t.purchase_date AS purchase_date, " +
-                    "t.price AS ticket_price, " +
+                    "e.ticket_price AS ticket_price, " +
                     "t.status AS status " + 
                     "FROM Ticket t " +
                     "JOIN Event e ON t.event_id = e.event_id " +

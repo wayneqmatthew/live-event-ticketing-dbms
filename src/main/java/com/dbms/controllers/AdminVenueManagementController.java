@@ -10,7 +10,6 @@ import java.sql.Statement;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import com.dbms.models.Artist;
 import com.dbms.models.Venue;
 import com.dbms.utils.Database;
 
