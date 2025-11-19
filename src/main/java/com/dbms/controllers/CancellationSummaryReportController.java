@@ -30,7 +30,7 @@ public class CancellationSummaryReportController implements Initializable {
     @FXML private TableView<CancellationReport> reportTable;
     @FXML private TableColumn<CancellationReport, Integer> eventIdColumn;
     @FXML private TableColumn<CancellationReport, String> eventNameColumn;
-    @FXML private TableColumn<CancellationReport, Double> totalRefundedColumn;
+    @FXML private TableColumn<CancellationReport, Integer> ticketsRefundedColumn;
     @FXML private DatePicker datePicker;
     @FXML private Button backButton;
     // NOTE: ticketsRefundedColumn is REMOVED
@@ -42,7 +42,7 @@ public class CancellationSummaryReportController implements Initializable {
         // 1. Setup Columns (Bind to Model)
         eventIdColumn.setCellValueFactory(new PropertyValueFactory<>("eventId"));
         eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
-        totalRefundedColumn.setCellValueFactory(new PropertyValueFactory<>("totalRefunded"));
+        ticketsRefundedColumn.setCellValueFactory(new PropertyValueFactory<>("totalRefunded"));
     }
 
     @FXML
@@ -63,15 +63,14 @@ public class CancellationSummaryReportController implements Initializable {
     private void loadSummaryReport(int year, int month) {
         reportList.clear();
 
-        // --- SQL AGGREGATION LOGIC (Simplified to only SUM) ---
         String sql = "SELECT e.event_id, e.event_name, " +
-                     "SUM(c.refund_amount) AS total_refund " + // Only SUM remains
+                     "COUNT(c.ticket_id) AS tickets_refunded " + // Only COUNT remains
                      "FROM Cancellation c " +
                      "JOIN Ticket t ON c.ticket_id = t.ticket_id " +
                      "JOIN Event e ON t.event_id = e.event_id " +
                      "WHERE YEAR(c.cancellation_date) = ? AND MONTH(c.cancellation_date) = ? " +
                      "GROUP BY e.event_id, e.event_name " +
-                     "ORDER BY total_refund DESC";
+                     "ORDER BY tickets_refunded DESC"; // Order by the new column
 
         try (Connection conn = Database.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -85,7 +84,7 @@ public class CancellationSummaryReportController implements Initializable {
                 reportList.add(new CancellationReport(
                     rs.getInt("event_id"),
                     rs.getString("event_name"),
-                    rs.getDouble("total_refund") // Only two data points from the SQL
+                    rs.getInt("tickets_refunded")
                 ));
             }
 
@@ -105,7 +104,7 @@ public class CancellationSummaryReportController implements Initializable {
     @FXML
     private void onBackClick(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/dbms/view/AdminReportMenu.fxml")); // Assuming this is your admin menu
+            Parent root = FXMLLoader.load(getClass().getResource("/com/dbms/view/AdminReportWindow.fxml")); 
             Stage stage = (Stage) backButton.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException e) {

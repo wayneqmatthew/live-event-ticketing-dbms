@@ -5,21 +5,21 @@ import javafx.beans.property.*;
 public class CancellationReport {
     private final IntegerProperty eventId;
     private final StringProperty eventName;
-    private final DoubleProperty totalRefunded; // Only the SUM remains
+    private final IntegerProperty ticketsRefunded;
 
-    public CancellationReport(int eventId, String eventName, double total) {
+    public CancellationReport(int eventId, String eventName, int ticketsRefunded) {
         this.eventId = new SimpleIntegerProperty(eventId);
         this.eventName = new SimpleStringProperty(eventName);
-        this.totalRefunded = new SimpleDoubleProperty(total);
+        this.ticketsRefunded = new SimpleIntegerProperty(ticketsRefunded); 
     }
 
     // Getters for PropertyValueFactory
     public int getEventId() { return eventId.get(); }
     public String getEventName() { return eventName.get(); }
-    public double getTotalRefunded() { return totalRefunded.get(); }
+    public int getTotalTicketsRefunded() {return ticketsRefunded.get(); }
 
     // Property accessors
     public IntegerProperty eventIdProperty() { return eventId; }
     public StringProperty eventNameProperty() { return eventName; }
-    public DoubleProperty totalRefundedProperty() { return totalRefunded; }
+    public IntegerProperty ticketsRefundedProperty(){ return ticketsRefunded; }
 }
