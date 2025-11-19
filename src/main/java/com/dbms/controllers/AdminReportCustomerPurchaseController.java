@@ -99,6 +99,10 @@ public class AdminReportCustomerPurchaseController implements Initializable{
 
             customerPurchaseTable.setItems(customerPurchaseList);
 
+            if (customerPurchaseList.isEmpty()) {
+                showAlert(Alert.AlertType.INFORMATION, "No Data", "No customer purchases have been made in this month (" + month + "/" + year + ").");
+            }
+
         } catch (SQLException e){
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to load database: " + e.getMessage());
