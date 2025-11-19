@@ -71,6 +71,12 @@ public class OrganizerCreateEventController {
             artist_id = Integer.parseInt(artist);
             capacity = Integer.parseInt(capacityAddField.getText());
             ticket_price = Integer.parseInt(ticketPriceAddField.getText());
+
+            if (venue_id <= 0 || artist_id <= 0 || capacity <= 0 || ticket_price <= 0) {
+                showAlert(Alert.AlertType.ERROR, "Form Error", "All numeric fields must be positive.");
+                return;
+            }
+
         } catch (NumberFormatException e){
             showAlert(Alert.AlertType.ERROR, "Form Error", "Numeric fields must be in a valid format.");
             return;
