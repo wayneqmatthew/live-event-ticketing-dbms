@@ -43,7 +43,7 @@ public class OrganizerCreateEventController {
 
     private Event eventToUpdate = null;
 
-    private int organizer_id;
+    private final int organizer_id = 1;
     
     @FXML
     private void onSaveClick(ActionEvent event){
@@ -93,6 +93,7 @@ public class OrganizerCreateEventController {
 
     private void addEvent(int venue_id, int artist_id, int organizer_id, String name, LocalTime time, LocalDate date, int capacity, String status){
         int event_id = 0;
+        organizer_id = LoginController.getIdNumber();
         String sql = "INSERT INTO Event (event_id, venue_id, artist_id, organizer_id, event_name, time, date, capacity, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = Database.connect();
@@ -186,10 +187,6 @@ public class OrganizerCreateEventController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-    
-    public void setOrganizerId(int organizerId) {
-        this.organizer_id = organizerId;
     }
 
     public void initData(Event event){
