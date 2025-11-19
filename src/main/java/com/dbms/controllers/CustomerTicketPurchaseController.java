@@ -70,11 +70,11 @@ public class CustomerTicketPurchaseController implements Initializable{
     private void loadAvailableEvents(){
         availableEventsList.clear();
         String sql = "SELECT e.event_id, e.event_name, e.time, e.date, " +
-                "(e.capacity - COUNT(t.ticket_id)) AS available_capacity, t.price AS ticket_price " +
+                "(e.capacity - COUNT(t.ticket_id)) AS available_capacity, e.ticket_price AS ticket_price " +
                 "FROM Event e " +
                 "LEFT JOIN Ticket t ON t.event_id = e.event_id AND t.status = 'Active' " +
                 "WHERE e.status = 'Upcoming' " +
-                "GROUP BY e.event_id, e.event_name, e.time, e.date, t.price, e.capacity";
+                "GROUP BY e.event_id, e.event_name, e.time, e.date, e.ticket_price, e.capacity";
         try (Connection conn = Database.connect();PreparedStatement preparedStatement = conn.prepareStatement(sql)){
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -114,7 +114,7 @@ public class CustomerTicketPurchaseController implements Initializable{
     private void onPurchaseClick(ActionEvent event){
         CustomerEvent selectedEvent = availableEventsTable.getSelectionModel().getSelectedItem();
 
-        String sql = "INSERT INTO Ticket (event_id, customer_id, purchase_date, status, price) " +
+        String sql = "INSERT INTO Ticket (event_id, customer_id, purchase_date, status, ticket_price) " +
             "VALUES(?, ?, ?, ?, ?)";
 
         if (selectedEvent == null){
