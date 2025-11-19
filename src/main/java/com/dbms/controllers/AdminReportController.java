@@ -32,7 +32,18 @@ public class AdminReportController {
 
     @FXML
     private void onCustomerPurchaseReportClick(ActionEvent event){
-        
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminReportCustomerPurchaseWindow.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage primaryStage = (Stage) rootPane.getScene().getWindow();
+
+            primaryStage.setScene(scene);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            showAlert(AlertType.ERROR, "Error", "Failed to load Ticket Sales Report: " + e.getMessage());
+        }
     }
 
     @FXML
