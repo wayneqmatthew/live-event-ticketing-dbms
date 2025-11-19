@@ -39,6 +39,9 @@ public class OrganizerCreateEventController {
     private TextField capacityAddField;
 
     @FXML
+    private TextField ticketPriceAddField;
+
+    @FXML
     private Button saveAddButton;
 
     private Event eventToUpdate = null;
@@ -54,12 +57,12 @@ public class OrganizerCreateEventController {
         String dateStr = dateAddField.getText();
         String status = "Upcoming";
 
-        if (venue.isEmpty() || artist.isEmpty() || name.isEmpty() || timeStr.isEmpty() || dateStr.isEmpty() || capacityAddField.getText().isEmpty()){
+        if (venue.isEmpty() || artist.isEmpty() || name.isEmpty() || timeStr.isEmpty() || dateStr.isEmpty() || capacityAddField.getText().isEmpty() || ticketPriceAddField.getText().isEmpty()){
             showAlert(Alert.AlertType.ERROR, "Form Error", "Please fill in all required fields.");
             return;
         }
 
-        int venue_id, artist_id, capacity;
+        int venue_id, artist_id, capacity, ticket_price;
         LocalDate date;
         LocalTime time;
         
@@ -67,6 +70,7 @@ public class OrganizerCreateEventController {
             venue_id = Integer.parseInt(venue);
             artist_id = Integer.parseInt(artist);
             capacity = Integer.parseInt(capacityAddField.getText());
+            ticket_price = Integer.parseInt(ticketPriceAddField.getText());
         } catch (NumberFormatException e){
             showAlert(Alert.AlertType.ERROR, "Form Error", "Numeric fields must be in a valid format.");
             return;
@@ -84,17 +88,17 @@ public class OrganizerCreateEventController {
         new Thread(() -> {
             if (eventToUpdate != null){
                 final int event_id = eventToUpdate.getEvent_id();
-                updateEvent(event_id, venue_id, artist_id, organizer_id, name, time, date, capacity);
+                updateEvent(event_id, venue_id, artist_id, organizer_id, name, time, date, capacity, ticket_price);
             } else {
-                addEvent(venue_id, artist_id, organizer_id, name, time, date, capacity, status);
+                addEvent(venue_id, artist_id, organizer_id, name, time, date, capacity, ticket_price, status);
             }
         }).start();
     }
 
-    private void addEvent(int venue_id, int artist_id, int organizer_id, String name, LocalTime time, LocalDate date, int capacity, String status){
+    private void addEvent(int venue_id, int artist_id, int organizer_id, String name, LocalTime time, LocalDate date, int capacity, float ticket_price, String status){
         int event_id = 0;
         organizer_id = LoginController.getIdNumber();
-        String sql = "INSERT INTO Event (event_id, venue_id, artist_id, organizer_id, event_name, time, date, capacity, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Event (event_id, venue_id, artist_id, organizer_id, event_name, time, date, capacity, ticket_price, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = Database.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -117,7 +121,8 @@ public class OrganizerCreateEventController {
                 pstmt.setTime(6, java.sql.Time.valueOf(time));
                 pstmt.setDate(7, java.sql.Date.valueOf(date));
                 pstmt.setInt(8, capacity);
-                pstmt.setString(9, status);
+                pstmt.setFloat(9, ticket_price);
+                pstmt.setString(10, status);
 
                 int rowsAffected = pstmt.executeUpdate();
 
@@ -138,8 +143,8 @@ public class OrganizerCreateEventController {
         }
     }
 
-    private void updateEvent(int event_id, int venue_id, int artist_id, int organizer_id, String name, LocalTime time, LocalDate date, int capacity){
-        String sql = "UPDATE Event SET venue_id = ?, artist_id = ?, organizer_id = ?, name = ?, time = ?, date = ?, capacity = ? WHERE event_id = ?";
+    private void updateEvent(int event_id, int venue_id, int artist_id, int organizer_id, String name, LocalTime time, LocalDate date, int capacity, float ticket_price){
+        String sql = "UPDATE Event SET venue_id = ?, artist_id = ?, organizer_id = ?, name = ?, time = ?, date = ?, capacity = ?, ticket_price = ? WHERE event_id = ?";
 
         try (Connection conn = Database.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -150,7 +155,8 @@ public class OrganizerCreateEventController {
                 pstmt.setTime(5, java.sql.Time.valueOf(time));
                 pstmt.setDate(6, java.sql.Date.valueOf(date));
                 pstmt.setInt(7, capacity);
-                pstmt.setInt(8, event_id);
+                pstmt.setFloat(8, ticket_price);
+                pstmt.setInt(9, event_id);
 
                 int rowsAffected = pstmt.executeUpdate();
                 Platform.runLater(() ->{
