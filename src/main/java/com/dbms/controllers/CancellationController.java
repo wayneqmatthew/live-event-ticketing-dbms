@@ -27,7 +27,7 @@ public class CancellationController implements Initializable {
     @FXML private TableView<CustomerTicket> ticketsTable;
     @FXML private TableColumn<CustomerTicket, Integer> ticketIdColumn;
     @FXML private TableColumn<CustomerTicket, String> eventNameColumn;
-    @FXML private TableColumn<CustomerTicket, LocalDate> purchaseDateColumn; // Changed to LocalDate based on Model
+    @FXML private TableColumn<CustomerTicket, LocalDate> purchaseDateColumn; 
     @FXML private TableColumn<CustomerTicket, Float> priceColumn;
     @FXML private TableColumn<CustomerTicket, String> statusColumn;
     
@@ -51,10 +51,10 @@ public class CancellationController implements Initializable {
         ticketList.clear();
         
         // We are aliasing the columns to match the standard getters (ticket_id, price, status, etc.)
-        String sql = "SELECT t.ticket_id AS ticket_id, " + // Alias 1
-                    "e.event_name AS event_name, " +     // Alias 2
+        String sql = "SELECT t.ticket_id AS ticket_id, " + 
+                    "e.event_name AS event_name, " +   
                     "t.purchase_date AS purchase_date, " +
-                    "e.ticket_price AS price, " +
+                    "t.price AS ticket_price, " +
                     "t.status AS status " + 
                     "FROM Ticket t " +
                     "JOIN Event e ON t.event_id = e.event_id " +
