@@ -52,7 +52,7 @@ public class OrganizerCreateEventController {
         String name = eventNameAddField.getText();
         String timeStr = timeAddField.getText();
         String dateStr = dateAddField.getText();
-        String status = "Active";
+        String status = "Upcoming";
 
         if (venue.isEmpty() || artist.isEmpty() || name.isEmpty() || timeStr.isEmpty() || dateStr.isEmpty() || capacityAddField.getText().isEmpty()){
             showAlert(Alert.AlertType.ERROR, "Form Error", "Please fill in all required fields.");
