@@ -9,12 +9,12 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-import com.dbms.models.TicketSales;
+import com.dbms.models.CustomerPurchase;
 import com.dbms.utils.Database;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.event.ActionEvent;    
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,39 +28,40 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class AdminReportTicketSalesController implements Initializable{
+public class AdminReportCustomerPurchaseController implements Initializable{
     @FXML
-    private TableView<TicketSales> ticketSalesTable;
+    private TableView<CustomerPurchase> customerPurchaseTable;
     
     @FXML
-    private TableColumn<TicketSales, Integer> eventIdTicketSalesColumn;
+    private TableColumn<CustomerPurchase, Integer> customerIDColumn;
 
     @FXML
-    private TableColumn<TicketSales, String> eventNameTicketSalesColumn;
+    private TableColumn<CustomerPurchase, String> nameColumn;
 
     @FXML
-    private TableColumn<TicketSales, Integer> ticketsSoldTicketSalesColumn;
+    private TableColumn<CustomerPurchase, Integer> ticketsPurchasedColumn;
 
     @FXML
-    private TableColumn<TicketSales, Float> totalRevenueTicketSalesColumn;
+    private TableColumn<CustomerPurchase, Float> totalColumn;
 
-    private ObservableList<TicketSales> ticketSalesList = FXCollections.observableArrayList();
+    private ObservableList<CustomerPurchase> customerPurchaseList = FXCollections.observableArrayList();
 
     @FXML
-    private DatePicker dateTicketSales;
+    private DatePicker dateCustomerPurchase;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-        eventIdTicketSalesColumn.setCellValueFactory(new PropertyValueFactory<>("event_id"));
-        eventNameTicketSalesColumn.setCellValueFactory(new PropertyValueFactory<>("event_name"));
-        ticketsSoldTicketSalesColumn.setCellValueFactory(new PropertyValueFactory<>("tickets_sold"));
-        totalRevenueTicketSalesColumn.setCellValueFactory(new PropertyValueFactory<>("total_revenue"));
+        customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customer_id"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        ticketsPurchasedColumn.setCellValueFactory(new PropertyValueFactory<>("tickets_purchased"));
+        totalColumn.setCellValueFactory(new PropertyValueFactory<>("total_spent"));
     }
 
-    private void loadTicketSales(){
-        ticketSalesList.clear();
 
-        LocalDate date = dateTicketSales.getValue();
+    private void loadCustomerPurchase(){
+        customerPurchaseList.clear();
+
+        LocalDate date = dateCustomerPurchase.getValue();
 
         if (date == null){
             showAlert(AlertType.ERROR, "Error", "Pick a date first.");
@@ -70,12 +71,13 @@ public class AdminReportTicketSalesController implements Initializable{
         int year = date.getYear();
         int month = date.getMonthValue();
 
-        String sql = "SELECT e.event_id, e.event_name, COUNT(t.ticket_id) AS tickets_sold, (COUNT(t.ticket_id) * e.ticket_price) AS total_revenue " + 
-            "FROM Event e " + 
-            "JOIN Ticket t " + 
-            "ON t.event_id = e.event_id " + 
-            "WHERE YEAR(t.purchase_date) = ? AND MONTH(t.purchase_date) = ? " + 
-            "GROUP BY e.event_id, e.event_name, e.ticket_price";
+        String sql = "SELECT c.customer_id, CONCAT(c.last_name, ', ', c.first_name) AS name, COUNT(t.ticket_id) AS tickets_purchased, " + "SUM(e.ticket_price) AS total_spent " +
+                     "FROM Ticket t " +
+                     "JOIN Customer c ON t.customer_id = c.customer_id " +
+                     "JOIN Event e ON t.event_id = e.event_id " +
+                     "WHERE YEAR(t.purchase_date) = ? AND MONTH(t.purchase_date) = ? " +
+                     "GROUP BY c.customer_id, c.first_name, c.last_name " +
+                     "ORDER BY total_spent DESC";
 
 
 
@@ -87,19 +89,19 @@ public class AdminReportTicketSalesController implements Initializable{
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()){
-                ticketSalesList.add(new TicketSales(
-                    resultSet.getInt("event_id"),
-                    resultSet.getString("event_name"),
-                    resultSet.getInt("tickets_sold"),
-                    resultSet.getFloat("total_revenue")
+                customerPurchaseList.add(new CustomerPurchase(
+                    resultSet.getInt("customer_id"),
+                    resultSet.getString("name"),
+                    resultSet.getInt("tickets_purchased"),
+                    resultSet.getFloat("total_spent")
                 ));
             }
 
-            if (ticketSalesList.isEmpty()) {
-                showAlert(Alert.AlertType.INFORMATION, "No Data", "No ticket sales have been made in this month (" + month + "/" + year + ").");
-            }
+            customerPurchaseTable.setItems(customerPurchaseList);
 
-            ticketSalesTable.setItems(ticketSalesList);
+            if (customerPurchaseList.isEmpty()) {
+                showAlert(Alert.AlertType.INFORMATION, "No Data", "No customer purchases have been made in this month (" + month + "/" + year + ").");
+            }
 
         } catch (SQLException e){
             e.printStackTrace();
@@ -108,15 +110,15 @@ public class AdminReportTicketSalesController implements Initializable{
     }
 
     @FXML
-    private void onTicketSalesDate(ActionEvent event){
-        loadTicketSales();
+    private void onCustomerPurchaseDate(ActionEvent event){
+        loadCustomerPurchase();
     }
 
     @FXML
     private void onReturnToReportMenuClick(ActionEvent event){
         try{
             Parent root = FXMLLoader.load(getClass().getResource("/com/dbms/view/AdminReportWindow.fxml"));
-            Stage stage = (Stage) ticketSalesTable.getScene().getWindow();
+            Stage stage = (Stage) customerPurchaseTable.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException e){
             e.printStackTrace();

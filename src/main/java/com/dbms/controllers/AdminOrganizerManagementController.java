@@ -11,7 +11,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.dbms.models.Organizer;
-import com.dbms.models.Organizer;
 import com.dbms.utils.Database;
 
 import javafx.collections.FXCollections;

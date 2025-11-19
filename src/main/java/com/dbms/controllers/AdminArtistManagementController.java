@@ -13,7 +13,6 @@ import java.util.ResourceBundle;
 import javafx.scene.Node;
 
 import com.dbms.models.Artist;
-import com.dbms.models.Customer;
 import com.dbms.utils.Database;
 
 import javafx.collections.FXCollections;

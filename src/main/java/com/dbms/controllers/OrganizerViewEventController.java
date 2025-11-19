@@ -22,10 +22,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -60,6 +58,9 @@ public class OrganizerViewEventController implements Initializable{
     private TableColumn<Event, Integer> capacityColumn;
 
     @FXML
+    private TableColumn<Event, Float> priceColumn;
+
+    @FXML
     private TableColumn<Event, String> statusColumn;
 
     private ObservableList<Event> eventList = FXCollections.observableArrayList();
@@ -75,6 +76,7 @@ public class OrganizerViewEventController implements Initializable{
         timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         capacityColumn.setCellValueFactory(new PropertyValueFactory<>("capacity"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("ticket_price"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
     
         loadEvents();
@@ -82,7 +84,7 @@ public class OrganizerViewEventController implements Initializable{
 
     private void loadEvents(){
         eventList.clear();
-        String sql = "SELECT e.event_id, e.venue_id, e.artist_id, e.organizer_id, e.event_name, e.time, e.date, e.capacity, e.status FROM Event e WHERE e.organizer_id = ?";
+        String sql = "SELECT e.event_id, e.venue_id, e.artist_id, e.organizer_id, e.event_name, e.time, e.date, e.capacity, e.ticket_price, e.status FROM Event e WHERE e.organizer_id = ?";
 
         try (Connection conn = Database.connect();PreparedStatement preparedStatement = conn.prepareStatement(sql)){
 
@@ -100,6 +102,7 @@ public class OrganizerViewEventController implements Initializable{
                     resultSet.getTime("time").toLocalTime(),
                     resultSet.getDate("date").toLocalDate(),
                     resultSet.getInt("capacity"),
+                    resultSet.getFloat("ticket_price"),
                     resultSet.getString("status")
                 ));
             }
@@ -140,8 +143,6 @@ public class OrganizerViewEventController implements Initializable{
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/OrganizerCreateEventWindow.fxml"));
             Parent root = loader.load();
-
-            OrganizerCreateEventController organizerCreateEventController = loader.getController();
             
             Stage stage = new Stage();
             Image logo = new Image("com/dbms/view/assets/logo.png");
@@ -165,8 +166,6 @@ public class OrganizerViewEventController implements Initializable{
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/OrganizerWindow.fxml"));
             Parent root = loader.load();
-
-            OrganizerController organizerController = loader.getController();
 
             Stage stage = (Stage) eventTable.getScene().getWindow();
             stage.setScene(new Scene(root));

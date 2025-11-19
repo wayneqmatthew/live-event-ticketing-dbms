@@ -46,15 +46,16 @@
       </Label>
       <TableView fx:id="eventTable" layoutX="75.0" layoutY="125.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1050.0" style="-fx-background-color: #36344F; -fx-text-fill: #FFFFFF;">
         <columns>
-          <TableColumn fx:id="event_idColumn" prefWidth="96.79998779296875" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="EVENT ID" />
-          <TableColumn fx:id="venue_idColumn" prefWidth="111.19999694824219" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="VENUE ID" />
-            <TableColumn fx:id="artist_idColumn" prefWidth="110.39996337890625" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="ARTIST ID" />
-            <TableColumn fx:id="organizer_idColumn" prefWidth="135.99996948242188" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="ORGANIZER ID" />
-            <TableColumn fx:id="eventNameColumn" prefWidth="208.00006103515625" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="EVENT NAME" />
-            <TableColumn fx:id="timeColumn" prefWidth="97.5999755859375" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="TIME" />
-            <TableColumn fx:id="dateColumn" prefWidth="90.39996337890625" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="DATE" />
-            <TableColumn fx:id="capacityColumn" prefWidth="97.60003662109375" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="CAPACITY" />
-            <TableColumn fx:id="statusColumn" prefWidth="104.7999267578125" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="STATUS" />
+          <TableColumn fx:id="event_idColumn" prefWidth="91.19998168945312" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="EVENT ID" />
+          <TableColumn fx:id="venue_idColumn" prefWidth="90.40003967285156" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="VENUE ID" />
+            <TableColumn fx:id="artist_idColumn" prefWidth="100.79998779296875" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="ARTIST ID" />
+            <TableColumn fx:id="organizer_idColumn" prefWidth="126.4000244140625" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="ORGANIZER ID" />
+            <TableColumn fx:id="eventNameColumn" prefWidth="174.4000244140625" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="EVENT NAME" />
+            <TableColumn fx:id="timeColumn" prefWidth="78.39996337890625" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="TIME" />
+            <TableColumn fx:id="dateColumn" prefWidth="96.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="DATE" />
+            <TableColumn fx:id="capacityColumn" prefWidth="124.0" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="CAPACITY" />
+            <TableColumn fx:id="priceColumn" prefWidth="72.79998779296875" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="PRICE" />
+            <TableColumn fx:id="statusColumn" prefWidth="98.4000244140625" style="-fx-font-size: 16; -fx-background-color: #B1A1ED; -fx-font-family: Inter 18pt; -fx-border-color: #36344F;" text="STATUS" />
         </columns>
          <effect>
             <DropShadow height="5.0" offsetY="5.0" radius="2.0" width="5.0">

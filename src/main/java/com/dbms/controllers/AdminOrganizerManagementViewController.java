@@ -10,9 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
-import com.dbms.models.Artist;
 import com.dbms.models.Event;
-import com.dbms.models.Venue;
 import com.dbms.models.Organizer;
 import com.dbms.utils.Database;
 
@@ -25,7 +23,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.Node;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -78,7 +75,7 @@ public class AdminOrganizerManagementViewController implements Initializable{
 
     private void loadEvents(){
         eventList.clear();
-        String sql = "SELECT e.event_id, e.venue_id, e.artist_id, e.organizer_id, e.event_name, e.time, e.date, e.capacity, e.status FROM Organizer o JOIN Event e ON o.organizer_id = e.organizer_id WHERE o.organizer_id = ?";
+        String sql = "SELECT e.event_id, e.venue_id, e.artist_id, e.organizer_id, e.event_name, e.time, e.date, e.capacity, e.ticket_price, e.status FROM Organizer o JOIN Event e ON o.organizer_id = e.organizer_id WHERE o.organizer_id = ?";
 
         try (Connection conn = Database.connect();PreparedStatement preparedStatement = conn.prepareStatement(sql)){
 
@@ -96,6 +93,7 @@ public class AdminOrganizerManagementViewController implements Initializable{
                     resultSet.getTime("time").toLocalTime(),
                     resultSet.getDate("date").toLocalDate(),
                     resultSet.getInt("capacity"),
+                    resultSet.getFloat("ticket_price"),
                     resultSet.getString("status")
                 ));
             }
