@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.dbms.models.Organizer;
+import com.dbms.models.Organizer;
 import com.dbms.utils.Database;
 
 import javafx.collections.FXCollections;
@@ -19,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -204,6 +206,32 @@ public class AdminOrganizerManagementController implements Initializable {
         } catch (IOException e){
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Error", "Could not load the add organizer management: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void onViewClick(ActionEvent event){
+        Organizer selectedOrganizer = organizerTable.getSelectionModel().getSelectedItem();
+
+        if (selectedOrganizer == null){
+            showAlert(Alert.AlertType.WARNING, "No Selection", "Please select a organizer to view.");
+            return;
+        }
+
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminOrganizerManagementViewWindow.fxml"));
+            Parent root = loader.load();
+
+            AdminOrganizerManagementViewController formUpdateController = loader.getController();
+
+            formUpdateController.initData(selectedOrganizer);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        }
+        catch(IOException e){
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Could not load the view organizer: " + e.getMessage());
         }
     }
 
