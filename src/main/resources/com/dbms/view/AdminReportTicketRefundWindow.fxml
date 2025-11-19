@@ -24,7 +24,7 @@
             <Image url="@assets/loginPage-asset3.png" />
          </image>
       </ImageView>
-      <Button fx:id="onBackClick" layoutX="411.0" layoutY="627.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="379.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="RETURN TO REPORT MENU" textFill="WHITE">
+      <Button fx:id="backButton" layoutX="411.0" layoutY="627.0" mnemonicParsing="false" onAction="#onBackClick" prefHeight="60.0" prefWidth="379.0" style="-fx-background-color: #4f378a; -fx-background-radius: 50;" text="RETURN TO REPORT MENU" textFill="WHITE">
          <font>
             <Font name="Inter 18pt Black" size="18.0" />
          </font>

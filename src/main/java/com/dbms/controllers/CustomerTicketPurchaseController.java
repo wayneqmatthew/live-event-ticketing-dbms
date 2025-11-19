@@ -69,13 +69,12 @@ public class CustomerTicketPurchaseController implements Initializable{
 
     private void loadAvailableEvents(){
         availableEventsList.clear();
-        String sql = "SELECT e.event_id, e.event_name, e.time, e.date, (e.capacity - COUNT(t.ticket_id)) AS available_capacity, e.ticket_price " + 
-            "FROM Event e " +
-            "LEFT JOIN Ticket t " + 
-            "ON t.event_id = e.event_id AND t.status = 'Active' " + 
-            "WHERE e.status = 'Upcoming' " + 
-            "GROUP BY e.event_id, e.event_name, e.time, e.date, e.ticket_price, e.capacity";
-
+        String sql = "SELECT e.event_id, e.event_name, e.time, e.date, " +
+                "(e.capacity - COUNT(t.ticket_id)) AS available_capacity, e.ticket_price AS ticket_price " +
+                "FROM Event e " +
+                "LEFT JOIN Ticket t ON t.event_id = e.event_id AND t.status = 'Active' " +
+                "WHERE e.status = 'Upcoming' " +
+                "GROUP BY e.event_id, e.event_name, e.time, e.date, e.ticket_price, e.capacity";
         try (Connection conn = Database.connect();PreparedStatement preparedStatement = conn.prepareStatement(sql)){
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -115,8 +114,8 @@ public class CustomerTicketPurchaseController implements Initializable{
     private void onPurchaseClick(ActionEvent event){
         CustomerEvent selectedEvent = availableEventsTable.getSelectionModel().getSelectedItem();
 
-        String sql = "INSERT INTO Ticket (event_id, customer_id, purchase_date, status) " +
-            "VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO Ticket (event_id, customer_id, purchase_date, status, ticket_price) " +
+            "VALUES(?, ?, ?, ?, ?)";
 
         if (selectedEvent == null){
             showAlert(Alert.AlertType.WARNING, "No Selection", "Please select an event to purchase.");
@@ -130,6 +129,7 @@ public class CustomerTicketPurchaseController implements Initializable{
             preparedStatement.setInt(2, customerIdNumber);
             preparedStatement.setDate(3, Date.valueOf(LocalDate.now()));
             preparedStatement.setString(4, "Active");
+            preparedStatement.setDouble(5, selectedEvent.getTicket_price());
 
             int rowsAffected = preparedStatement.executeUpdate();
             Platform.runLater(() ->{

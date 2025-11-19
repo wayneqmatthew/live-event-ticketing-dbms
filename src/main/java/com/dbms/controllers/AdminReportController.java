@@ -48,7 +48,18 @@ public class AdminReportController {
 
     @FXML
     private void onTicketRefundReportClick(ActionEvent event){
-        
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/dbms/view/AdminReportTicketRefundWindow.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage primaryStage = (Stage) rootPane.getScene().getWindow();
+
+            primaryStage.setScene(scene);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            showAlert(AlertType.ERROR, "Error", "Failed to load Ticket Refund Report: " + e.getMessage());
+        }
     }
 
     @FXML
